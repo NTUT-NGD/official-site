@@ -1,15 +1,20 @@
 <template>
   <div class="home">
-    <v-btn @click="create">Create</v-btn>
+    <calendar />
   </div>
 </template>
 
 <script>
+import calendar from "@/components/calendar/index.vue";
 export default {
-  name: "Home",
-  components: {},
-  methods: {
-    create() {}
-  }
+  name: "app",
+  components: {
+    calendar
+  },
+  data() {
+    return {};
+  },
+
+  computed: {}
 };
 </script>
