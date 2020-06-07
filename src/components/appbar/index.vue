@@ -13,7 +13,11 @@
         @click="drawerState(true)"
         class="hidden-lg-and-up"
       ></v-app-bar-nav-icon>
-      遊戲設計
+      <v-btn color="primary" text to="/">
+        <h2 class="secondary--text">
+          遊戲設計
+        </h2>
+      </v-btn>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -23,12 +27,6 @@
         {{ item.name }}
       </v-btn>
     </v-toolbar-title>
-    <v-switch
-      v-model="themeSwitch"
-      label="Dark Mode"
-      color="primary"
-      style="position:relative;top:10px"
-    ></v-switch>
   </v-app-bar>
 </template>
 
@@ -38,7 +36,6 @@ export default {
   props: ["drawer"],
   data() {
     return {
-      themeSwitch: false,
       items: [
         { name: "Explore", src: "/" },
         { name: "About", src: "/About" },
@@ -52,11 +49,6 @@ export default {
   methods: {
     drawerState(val) {
       this.$emit("drawerState", val);
-    }
-  },
-  watch: {
-    themeSwitch(newValue) {
-      this.$vuetify.theme.dark = newValue;
     }
   },
   computed: {}
