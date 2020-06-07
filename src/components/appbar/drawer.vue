@@ -27,12 +27,12 @@ export default {
   data() {
     return {
       items: [
-        { name: "Explore", src: "/" },
-        { name: "About", src: "/About" },
-        { name: "Games", src: "/Games" },
-        { name: "Team up", src: "/Teams" },
-        { name: "Calendar", src: "/Calendar" },
-        { name: "Contact", src: "/Contact" }
+        { name: "首頁", src: "/" },
+        { name: "關於社團", src: "/About" },
+        { name: "遊戲作品", src: "/Games" },
+        { name: "創作專案", src: "/Teams" },
+        { name: "社團行事曆", src: "/Calendar" },
+        { name: "聯絡資訊", src: "/Contact" }
       ]
     };
   },

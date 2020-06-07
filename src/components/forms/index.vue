@@ -39,15 +39,17 @@
         >
         </v-textarea>
       </v-card>
-      <v-btn
-        color="secondary"
-        class="mr-4"
-        @click="send"
-        style="position:relative;margin-top:20px"
-        elevation="0"
-      >
-        提交
-      </v-btn>
+      <v-row style="position:relative;margin-top:20px">
+        <v-col>
+          <v-btn color="secondary" class="mr-4" @click="send" elevation="0">
+            提交
+          </v-btn>
+        </v-col>
+        <v-col cols="6"></v-col>
+        <v-col cols="2">
+          <p class="red--text">{{ submitState }}</p>
+        </v-col>
+      </v-row>
     </v-card>
   </v-form>
 </template>
@@ -58,6 +60,7 @@ import { contact } from "@/api/forms/contact.js";
 export default {
   data() {
     return {
+      submitState: "",
       formData: [
         {
           perform: "姓名",
@@ -91,9 +94,19 @@ export default {
   },
   methods: {
     send() {
+      let vm = this;
+      vm.setSubmitState();
+      vm.$refs.form.reset();
       let form = document.getElementById("form");
       let formdata = new FormData(form);
       contact(formdata);
+    },
+    setSubmitState() {
+      let vm = this;
+      vm.submitState = "提交成功";
+      setTimeout(() => {
+        vm.submitState = "";
+      }, 1500);
     }
   }
 };
