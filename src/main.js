@@ -20,3 +20,13 @@ new Vue({
 }).$mount("#app");
 
 Vue.use(VueGAPI, gconfig);
+
+//Ignore error fomr .native
+const ignoredMessage =
+  "The .native modifier for v-on is only valid on components but it was used on <div>.";
+
+Vue.config.warnHandler = (message, vm, componentTrace) => {
+  if (message !== ignoredMessage) {
+    console.error(message + componentTrace);
+  }
+};

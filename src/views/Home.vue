@@ -1,28 +1,15 @@
 <template>
-  <div class="home">
-    <v-btn @click="login">Login</v-btn>
-    <calendar />
-  </div>
+  <div class="home"></div>
 </template>
 
 <script>
-import { googleLogin } from "@/api/auth/googleLogin.js";
-import calendar from "@/components/calendar/index.vue";
 export default {
   name: "app",
-  components: {
-    calendar
-  },
+  components: {},
   data() {
-    return {
-      auth: null
-    };
+    return {};
   },
-  methods: {
-    async login() {
-      this.auth = await googleLogin();
-    }
-  },
+  methods: {},
   computed: {}
 };
 </script>

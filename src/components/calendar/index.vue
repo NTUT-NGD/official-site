@@ -79,6 +79,7 @@
 export default {
   data() {
     return {
+      today: new Date().toISOString().substr(0, 10),
       focus: "",
       type: "month",
       typeToLabel: {
@@ -115,16 +116,6 @@ export default {
         "green",
         "orange",
         "grey darken-1"
-      ],
-      names: [
-        "Meeting",
-        "Holiday",
-        "PTO",
-        "Travel",
-        "Event",
-        "Birthday",
-        "Conference",
-        "Party"
       ]
     };
   },
