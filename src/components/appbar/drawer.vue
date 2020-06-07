@@ -10,7 +10,7 @@
       <v-list-item v-for="(item, index) in items" :key="index">
         <v-list-item-content>
           <v-list-item-title>
-            <v-btn text small elevation rounded>
+            <v-btn text small elevation rounded :to="item.src">
               {{ item.name }}
             </v-btn>
           </v-list-item-title>
@@ -27,12 +27,12 @@ export default {
   data() {
     return {
       items: [
-        { name: "Explore" },
-        { name: "About" },
-        { name: "Games" },
-        { name: "Team up" },
-        { name: "Calendar" },
-        { name: "Contact" }
+        { name: "Explore", src: "/" },
+        { name: "About", src: "/About" },
+        { name: "Games", src: "/Games" },
+        { name: "Team up", src: "/Teams" },
+        { name: "Calendar", src: "/Calendar" },
+        { name: "Contact", src: "/Contact" }
       ]
     };
   },
