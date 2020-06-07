@@ -94,6 +94,7 @@ export default {
   },
   methods: {
     send() {
+      if (!this.$refs.form.validate()) return;
       let url =
         "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfQ30GpXUP0PaLdu-KDquuLB_NNcJeVa8siFMybIwAnfvcs7g/formResponse";
       let vm = this;

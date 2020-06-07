@@ -13,6 +13,7 @@
                 :label="item.perform"
                 :value="item.value"
                 :name="item.entry"
+                v-model="item.value"
                 required
               ></v-text-field>
             </v-col>
@@ -27,6 +28,7 @@
                 :value="avatar.value"
                 :name="avatar.entry"
                 required
+                v-model="avatar.value"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -48,6 +50,7 @@
                   value="__other_option__"
                 ></v-radio>
                 <v-text-field
+                  v-if="radios == '__other_option__'"
                   v-model="unit"
                   label="學校／單位"
                   :rules="unitRule"
@@ -71,7 +74,15 @@
             </v-col>
           </v-row>
           <v-row style="position:relative;margin-top:10px">
-            <v-col> </v-col>
+            <v-col>
+              <p>{{ avatar.perform }}： {{ avatar.value }}</p>
+            </v-col>
+          </v-row>
+          <v-row style="position:relative;margin-top:10px">
+            <v-col>
+              <p v-if="radios == '是'">學校： 臺北科技大學</p>
+              <p v-else>學校／單位： {{ unit }}</p>
+            </v-col>
           </v-row>
           <v-row>
             <v-col>
@@ -98,7 +109,7 @@ import { postForm } from "@/api/forms/postForm.js";
 export default {
   data() {
     return {
-      radios: "radio-1",
+      radios: "是",
       submitState: "",
       formData: [
         {
@@ -133,7 +144,7 @@ export default {
         v => !!v || "Unit is required",
         v => v.length <= 30 || "Unit must be less than 30 characters"
       ],
-      unit: "NTUT",
+      unit: "",
       avatar: {
         perform: "冒險者 ID ｜ 暱稱",
         entry: "entry.54684878",
@@ -147,6 +158,7 @@ export default {
   },
   methods: {
     send() {
+      if (!this.$refs.form.validate()) return;
       let url =
         "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdOLRJueoyF9UIp3tDoPJBKkOVhqkdEWi98HUkASpkQJ9C27g/formResponse";
       let vm = this;
