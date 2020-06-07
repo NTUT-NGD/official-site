@@ -12,7 +12,7 @@ export default new Vuetify({
       },
       dark: {
         primary: "#263238",
-        secondary: "#263238"
+        secondary: "#ffffff"
       }
     }
   }
