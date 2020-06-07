@@ -55,21 +55,64 @@
       :close-on-content-click="false"
       :activator="selectedElement"
       max-width="500"
+      class="primary"
     >
-      <v-card color="grey lighten-4" min-width="350px" flat elevation="0">
-        <v-toolbar :color="selectedEvent.color" dark>
-          <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-          <v-spacer></v-spacer>
+      <v-card min-width="350px" flat elevation="0">
+        <v-toolbar elevation="0" color="primary" height="30">
+          <v-spacer />
+          <v-btn
+            icon
+            color="secondary"
+            small
+            style="position:relative;top:10px;left:-10px"
+            @click="selectedOpen = false"
+          >
+            <v-icon>
+              mdi-window-close
+            </v-icon>
+          </v-btn>
         </v-toolbar>
         <v-card-text>
-          <br />
-          <span v-html="selectedEvent.details"></span>
+          <v-row>
+            <v-col cols="1">
+              <v-icon :color="selectedEvent.color">mdi-checkbox-blank</v-icon>
+            </v-col>
+            <v-col cols="10">
+              <h1 v-html="selectedEvent.name"></h1>
+            </v-col>
+          </v-row>
+          <p style="position:relative;left:7px">
+            {{ selectedEvent.start }} ~ {{ selectedEvent.end }}
+          </p>
         </v-card-text>
-        <v-card-actions>
-          <v-btn text color="secondary" @click="selectedOpen = false">
-            Close
-          </v-btn>
-        </v-card-actions>
+        <v-card-text>
+          <v-row>
+            <v-col cols="1">
+              <v-icon>mdi-comment-text-outline</v-icon>
+            </v-col>
+            <v-col cols="10">
+              <span v-html="selectedEvent.details"></span>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-text>
+          <v-row>
+            <v-col cols="1">
+              <v-icon>mdi-map-marker</v-icon>
+            </v-col>
+            <v-col cols="10">
+              <span v-html="selectedEvent.location"></span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1">
+              <v-icon>mdi-calendar</v-icon>
+            </v-col>
+            <v-col cols="10">
+              <span v-html="selectedEvent.poster"></span>
+            </v-col>
+          </v-row>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </v-row>
@@ -99,13 +142,19 @@ export default {
             "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
           start: "2020-06-01 09:00",
           end: "2020-06-10 09:00",
-          color: "orange"
+          color: "orange",
+          location: "Taipei",
+          isPrivate: false,
+          poster: "NTUT GameDesign"
         },
         {
           name: "pp",
           details: "teasgasl;gajsgst",
           start: "2020-06-01 09:00",
-          color: "blue"
+          color: "blue",
+          location: "Taipei",
+          isPrivate: false,
+          poster: "NTUT GameDesign"
         }
       ],
       colors: [
