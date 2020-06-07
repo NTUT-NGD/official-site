@@ -1,0 +1,72 @@
+<template>
+  <v-app-bar
+    color="white"
+    class="appbar"
+    dense
+    fixed
+    app
+    elevation="0"
+    height="70"
+  >
+    <v-toolbar-title>
+      <v-app-bar-nav-icon
+        @click="drawerState(true)"
+        class="hidden-lg-and-up"
+      ></v-app-bar-nav-icon>
+      遊戲設計
+    </v-toolbar-title>
+
+    <v-spacer></v-spacer>
+
+    <v-toolbar-title class="hidden-md-and-down">
+      <v-btn v-for="(item, index) in items" :key="index" text>
+        {{ item.name }}
+      </v-btn>
+    </v-toolbar-title>
+    <v-switch
+      v-model="themeSwitch"
+      label="Dark Mode"
+      color="red"
+      style="position:relative;top:10px"
+    ></v-switch>
+  </v-app-bar>
+</template>
+
+<script>
+export default {
+  name: "Appbar",
+  props: ["drawer"],
+  data() {
+    return {
+      themeSwitch: false,
+      items: [
+        { name: "Explore" },
+        { name: "About" },
+        { name: "Games" },
+        { name: "Team up" },
+        { name: "Calendar" },
+        { name: "Contact" }
+      ]
+    };
+  },
+  methods: {
+    drawerState(val) {
+      this.$emit("drawerState", val);
+    }
+  },
+  computed: {}
+};
+</script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+html,
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+@media only screen and (min-width: 1264px) {
+  .appbar {
+    padding: 0 10% 0 10%;
+  }
+}
+</style>
