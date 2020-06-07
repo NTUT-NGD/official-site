@@ -19,6 +19,19 @@
           </v-row>
           <v-row>
             <v-col>
+              <v-text-field
+                class="primary--text"
+                color="white"
+                :rules="avatar.rule"
+                :label="avatar.perform"
+                :value="avatar.value"
+                :name="avatar.entry"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <span>是否為北科學生?</span>
               <v-radio-group v-model="radios" name="entry.353177557" row>
                 <v-radio
@@ -45,11 +58,26 @@
               </v-radio-group>
             </v-col>
           </v-row>
-          <v-row style="position:relative;margin-top:20px">
+        </v-container>
+        <v-card-title class="headline">確認個人資料</v-card-title>
+        <v-container class="pa-5">
+          <v-row
+            style="position:relative;margin-top:10px"
+            v-for="(item, index) in formData"
+            :key="index"
+          >
+            <v-col>
+              <p>{{ item.perform }}： {{ item.value }}</p>
+            </v-col>
+          </v-row>
+          <v-row style="position:relative;margin-top:10px">
+            <v-col> </v-col>
+          </v-row>
+          <v-row>
             <v-col>
               <v-btn color="btnColor" class="mr-4" @click="send" elevation="0">
                 <span class="white--text">
-                  提交
+                  報名
                 </span>
               </v-btn>
             </v-col>
@@ -58,7 +86,6 @@
               <p class="red--text">{{ submitState }}</p>
             </v-col>
           </v-row>
-          <p>{{ unit }}</p>
         </v-container>
       </v-card>
     </v-form>
@@ -77,25 +104,25 @@ export default {
         {
           perform: "姓名",
           entry: "entry.1492883158",
-          value: "Aaron",
+          value: "",
           rule: [
             v => !!v || "Name is required",
-            v => v.length <= 30 || "Name must be less than 10 characters"
+            v => v.length <= 30 || "Name must be less than 30 characters"
           ]
         },
         {
           perform: "就讀系級",
           entry: "entry.241297651",
-          value: "CSIE",
+          value: "",
           rule: [
             v => !!v || "Major is required",
-            v => v.length <= 30 || "Name must be less than 10 characters"
+            v => v.length <= 30 || "Major must be less than 30 characters"
           ]
         },
         {
           perform: "信箱",
           entry: "entry.1829177282",
-          value: "t107590017@ntut.org.tw",
+          value: "",
           rule: [
             v => !!v || "E-mail is required",
             v => /.+@.+/.test(v) || "E-mail must be valid"
@@ -104,9 +131,18 @@ export default {
       ],
       unitRule: [
         v => !!v || "Unit is required",
-        v => v.length <= 30 || "Name must be less than 10 characters"
+        v => v.length <= 30 || "Unit must be less than 30 characters"
       ],
-      unit: "NTUT"
+      unit: "NTUT",
+      avatar: {
+        perform: "冒險者 ID ｜ 暱稱",
+        entry: "entry.54684878",
+        value: "",
+        rule: [
+          v => !!v || "ID is required",
+          v => v.length <= 10 || "ID must be less than 10 characters"
+        ]
+      }
     };
   },
   methods: {
