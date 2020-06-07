@@ -3,7 +3,9 @@
     <v-card class="mx-auto pa-5" max-width="600" elevation="0">
       <v-card elevation="0" outlined>
         <v-card-title class="headline">聯絡我們</v-card-title>
-        <v-card-subtitle>有什麼想詢問我們的問題呢？</v-card-subtitle>
+        <v-card-subtitle
+          >有什麼想詢問我們的問題呢、或是只是想跟我們聊天，都可以透過下方的表單聯絡我們</v-card-subtitle
+        >
       </v-card>
       <v-card
         class="mx-auto pa-5"
@@ -13,21 +15,32 @@
         v-for="(item, index) in formData"
         :key="index"
       >
-        <v-card-title>{{ item.perform }}</v-card-title>
         <v-text-field
           class="primary--text"
           color="white"
-          style="padding: 0 20px 0 20px"
-          :v-model="item.perform"
           :rules="item.rule"
-          label="您的回答"
+          :label="item.perform"
           :value="item.value"
           :name="item.entry"
           required
         ></v-text-field>
       </v-card>
+      <v-card
+        class="mx-auto pa-5"
+        outlined
+        elevation="0"
+        style="position:relative;margin-top:20px"
+      >
+        <v-textarea
+          :rules="message.rule"
+          :label="message.perform"
+          :value="message.value"
+          :name="message.entry"
+        >
+        </v-textarea>
+      </v-card>
       <v-btn
-        color="primary"
+        color="secondary"
         class="mr-4"
         @click="send"
         style="position:relative;margin-top:20px"
@@ -52,24 +65,28 @@ export default {
           value: "",
           rule: [
             v => !!v || "Name is required",
-            v => v.length <= 10 || "Name must be less than 10 characters"
+            v => v.length <= 30 || "Name must be less than 10 characters"
           ]
         },
         {
-          perform: "聯絡資訊 | Email",
+          perform: "信箱",
           entry: "entry.1274605172",
           value: "",
           rule: [
             v => !!v || "E-mail is required",
             v => /.+@.+/.test(v) || "E-mail must be valid"
           ]
-        },
-        {
-          perform: "想瞭解的事情",
-          entry: "entry.1927840133",
-          value: ""
         }
-      ]
+      ],
+      message: {
+        perform: "您的訊息",
+        entry: "entry.1927840133",
+        value: "",
+        rule: [
+          v => !!v || "Message is required",
+          v => v.length <= 300 || "Name must be less than 300 characters"
+        ]
+      }
     };
   },
   methods: {

@@ -19,7 +19,7 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-title class="hidden-md-and-down">
-      <v-btn v-for="(item, index) in items" :key="index" text>
+      <v-btn v-for="(item, index) in items" :key="index" text :to="item.src">
         {{ item.name }}
       </v-btn>
     </v-toolbar-title>
@@ -40,12 +40,12 @@ export default {
     return {
       themeSwitch: false,
       items: [
-        { name: "Explore" },
-        { name: "About" },
-        { name: "Games" },
-        { name: "Team up" },
-        { name: "Calendar" },
-        { name: "Contact" }
+        { name: "Explore", src: "/" },
+        { name: "About", src: "/About" },
+        { name: "Games", src: "/Games" },
+        { name: "Team up", src: "/Teams" },
+        { name: "Calendar", src: "/Calendar" },
+        { name: "Contact", src: "/Contact" }
       ]
     };
   },
