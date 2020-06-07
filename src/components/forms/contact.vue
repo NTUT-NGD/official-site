@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { contact } from "@/api/forms/contact.js";
+import { postForm } from "@/api/forms/postForm.js";
 
 export default {
   data() {
@@ -94,12 +94,14 @@ export default {
   },
   methods: {
     send() {
+      let url =
+        "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfQ30GpXUP0PaLdu-KDquuLB_NNcJeVa8siFMybIwAnfvcs7g/formResponse";
       let vm = this;
       vm.setSubmitState();
       vm.$refs.form.reset();
       let form = document.getElementById("form");
       let formdata = new FormData(form);
-      contact(formdata);
+      postForm(url, formdata);
     },
     setSubmitState() {
       let vm = this;

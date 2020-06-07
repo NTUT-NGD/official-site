@@ -8,11 +8,13 @@ export default new Vuetify({
     themes: {
       light: {
         primary: "#ffffff",
-        secondary: "#263238"
+        secondary: "#263238",
+        btnColor: "#1565c0"
       },
       dark: {
         primary: "#263238",
-        secondary: "#ffffff"
+        secondary: "#ffffff",
+        btnColor: "#1565c0"
       }
     }
   }

@@ -32,7 +32,8 @@ export default {
         { name: "遊戲作品", src: "/Games" },
         { name: "創作專案", src: "/Teams" },
         { name: "社團行事曆", src: "/Calendar" },
-        { name: "聯絡資訊", src: "/Contact" }
+        { name: "聯絡我們", src: "/Contact" },
+        { name: "加入社團", src: "/Join" }
       ]
     };
   },
