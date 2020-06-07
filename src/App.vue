@@ -30,6 +30,11 @@ export default {
     setDrawer(val) {
       this.drawer = val;
     }
+  },
+  computed: {
+    getTheme() {
+      return this.$store.state.darkTheme;
+    }
   }
 };
 </script>

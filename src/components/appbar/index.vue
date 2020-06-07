@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    color="white"
+    color="primary"
     class="appbar"
     dense
     fixed
@@ -26,7 +26,7 @@
     <v-switch
       v-model="themeSwitch"
       label="Dark Mode"
-      color="red"
+      color="primary"
       style="position:relative;top:10px"
     ></v-switch>
   </v-app-bar>
@@ -52,6 +52,11 @@ export default {
   methods: {
     drawerState(val) {
       this.$emit("drawerState", val);
+    }
+  },
+  watch: {
+    themeSwitch(newValue) {
+      this.$vuetify.theme.dark = newValue;
     }
   },
   computed: {}
