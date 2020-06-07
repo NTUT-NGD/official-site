@@ -1,17 +1,14 @@
 <template>
   <div class="home">
-    <v-container>
-      <div style="height:2000px"></div>
-    </v-container>
+    <contactForm />
   </div>
 </template>
 
 <script>
+import contactForm from "@/components/forms/contact.vue";
 export default {
   name: "Home",
-  components: {},
-  methods: {
-    create() {}
-  }
+  components: { contactForm },
+  methods: {}
 };
 </script>
