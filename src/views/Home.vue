@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <v-btn @click="create">Create</v-btn>
+    <v-container>
+      <div style="height:2000px"></div>
+    </v-container>
   </div>
 </template>
 
