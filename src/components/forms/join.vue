@@ -35,7 +35,12 @@
           <v-row>
             <v-col>
               <span>是否為北科學生?</span>
-              <v-radio-group v-model="radios" name="entry.353177557" row>
+              <v-radio-group
+                v-model="radios"
+                name="entry.353177557"
+                :rules="[v => !!v || 'Item is required']"
+                row
+              >
                 <v-radio
                   label="是"
                   color="red"
@@ -109,7 +114,7 @@ import { postForm } from "@/api/forms/postForm.js";
 export default {
   data() {
     return {
-      radios: "是",
+      radios: "",
       submitState: "",
       formData: [
         {
@@ -163,10 +168,10 @@ export default {
         "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdOLRJueoyF9UIp3tDoPJBKkOVhqkdEWi98HUkASpkQJ9C27g/formResponse";
       let vm = this;
       vm.setSubmitState();
-      vm.$refs.form.reset();
       let form = document.getElementById("form");
       let formdata = new FormData(form);
       postForm(url, formdata);
+      vm.$refs.form.reset();
     },
     setSubmitState() {
       let vm = this;
