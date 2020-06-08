@@ -39,7 +39,7 @@
         <v-calendar
           ref="calendar"
           v-model="focus"
-          color="primary"
+          color="#ef5350"
           :events="events"
           :event-color="getEventColor"
           :now="today"
@@ -119,6 +119,7 @@
 </template>
 
 <script>
+import { retrive } from "@/api/retriveData/retrive.js";
 export default {
   data() {
     return {
@@ -135,29 +136,7 @@ export default {
       selectedEvent: {},
       selectedElement: null,
       selectedOpen: false,
-      events: [
-        {
-          name: "Weekly Meeting",
-          details:
-            "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
-          start: "2020-06-01 09:00",
-          end: "2020-06-10 09:00",
-          color: "orange",
-          location: "Taipei",
-          isPrivate: false,
-          poster: "NTUT GameDesign"
-        },
-        {
-          name: "pp",
-          details: "teasgasl;gajsgst",
-          start: "2020-06-01 09:00",
-          end: "2020-06-01 10:00",
-          color: "blue",
-          location: "Taipei",
-          isPrivate: false,
-          poster: "NTUT GameDesign"
-        }
-      ],
+      events: [],
       colors: [
         "blue",
         "indigo",
@@ -198,8 +177,12 @@ export default {
   },
   mounted() {
     this.$refs.calendar.checkChange();
+    this.setEvenets();
   },
   methods: {
+    async setEvenets() {
+      this.events = await retrive("Calendar");
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";

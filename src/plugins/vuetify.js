@@ -12,7 +12,7 @@ export default new Vuetify({
         btnColor: "#1565c0"
       },
       dark: {
-        primary: "#263238",
+        primary: "#62727b",
         secondary: "#ffffff",
         btnColor: "#1565c0"
       }
