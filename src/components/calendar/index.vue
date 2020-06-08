@@ -151,6 +151,7 @@ export default {
           name: "pp",
           details: "teasgasl;gajsgst",
           start: "2020-06-01 09:00",
+          end: "2020-06-01 10:00",
           color: "blue",
           location: "Taipei",
           isPrivate: false,
