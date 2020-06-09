@@ -120,6 +120,7 @@
 
 <script>
 import { retrive } from "@/api/retriveData/retrive.js";
+
 export default {
   data() {
     return {
@@ -148,6 +149,7 @@ export default {
       ]
     };
   },
+  components: {},
   computed: {
     title() {
       const { start, end } = this;
