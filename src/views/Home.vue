@@ -4,12 +4,15 @@
 
 <script>
 export default {
-  name: "app",
+  name: "home",
   components: {},
   data() {
     return {};
   },
   methods: {},
+  mounted() {
+    this.$store.commit("setActivedPage", "/");
+  },
   computed: {}
 };
 </script>

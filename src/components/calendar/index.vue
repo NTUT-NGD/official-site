@@ -72,7 +72,7 @@
             </v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text>
+        <v-card-text class="primary">
           <v-row>
             <v-col cols="1">
               <v-icon :color="selectedEvent.color">mdi-checkbox-blank</v-icon>
@@ -178,6 +178,7 @@ export default {
   mounted() {
     this.$refs.calendar.checkChange();
     this.setEvenets();
+    this.$store.commit("setActivedPage", "/Calendar");
   },
   methods: {
     async setEvenets() {

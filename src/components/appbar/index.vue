@@ -23,7 +23,14 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-title class="hidden-md-and-down">
-      <v-btn v-for="(item, index) in items" :key="index" text :to="item.src">
+      <v-btn
+        v-bind:color="getActivedPage === item.src ? 'btnColor' : 'secondary'"
+        v-for="(item, index) in items"
+        :key="index"
+        text
+        :to="item.src"
+        class="mark"
+      >
         {{ item.name }}
       </v-btn>
     </v-toolbar-title>
@@ -36,6 +43,7 @@ export default {
   props: ["drawer"],
   data() {
     return {
+      chosenBtn: "",
       items: [
         { name: "首頁", src: "/" },
         { name: "關於社團", src: "/About" },
@@ -50,9 +58,16 @@ export default {
   methods: {
     drawerState(val) {
       this.$emit("drawerState", val);
+    },
+    setActivedPage(val) {
+      this.$store.commit("setActivedPage", val);
     }
   },
-  computed: {}
+  computed: {
+    getActivedPage() {
+      return this.$store.state.activedPage;
+    }
+  }
 };
 </script>
 
@@ -65,6 +80,16 @@ body {
 @media only screen and (min-width: 1264px) {
   .appbar {
     padding: 0 8% 0 8%;
+  }
+  .v-btn:hover:before {
+    color: transparent;
+    border: none;
+    border-radius: 0;
+    border-color: transparent;
+  }
+  .mark:hover {
+    background: linear-gradient(to top, #5e92f3 50%, transparent 50%);
+    border-radius: 0;
   }
 }
 </style>

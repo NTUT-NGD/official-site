@@ -9,6 +9,9 @@ import joinForm from "@/components/forms/join.vue";
 export default {
   name: "Join",
   components: { joinForm },
-  methods: {}
+  methods: {},
+  mounted() {
+    this.$store.commit("setActivedPage", "/Join");
+  }
 };
 </script>

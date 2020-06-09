@@ -22,8 +22,11 @@ new Vue({
 Vue.use(VueGAPI, gconfig);
 
 //Ignore error fomr .native
-const ignoredMessage =
-  "The .native modifier for v-on is only valid on components but it was used on <div>.";
+const ignoredMessage = [
+  "The .native modifier for v-on is only valid on components but it was used on <div>.",
+  "TypeError: v is undefined",
+  "The Same Origin Policy disallows reading the remote resource at https://docs.google.com/forms/u/0/d/e/1FAIpQLSfQ30GpXUP0PaLdu-KDquuLB_NNcJeVa8siFMybIwAnfvcs7g/formResponse. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing)."
+];
 
 Vue.config.warnHandler = (message, vm, componentTrace) => {
   if (message !== ignoredMessage) {
