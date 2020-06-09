@@ -14,7 +14,7 @@
           <v-icon class="pa-0" small style="position:relative;left:-3px"
             >mdi-plus</v-icon
           >
-          建立
+          建立活動
         </v-btn>
       </template>
       <v-form ref="form">
@@ -40,78 +40,148 @@
                 prepend-icon="mdi-map-marker"
                 required
               ></v-text-field>
-              <v-menu
-                ref="menu"
-                v-model="menu"
-                :close-on-content-click="false"
-                :return-value.sync="startDate"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="startDate"
-                    label="開始時間"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  color="btnColor"
-                  v-model="startDate"
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn text color="btnColor" @click="menu = false"
-                    >Cancel</v-btn
+              <v-row>
+                <v-col>
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="startDate"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
                   >
-                  <v-btn
-                    text
-                    color="btnColor"
-                    @click="$refs.menu.save(startDate)"
-                    >OK</v-btn
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="startDate"
+                        label="開始時間"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      color="btnColor"
+                      v-model="startDate"
+                      no-title
+                      scrollable
+                    >
+                      <v-spacer></v-spacer>
+                      <v-btn text color="btnColor" @click="menu = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="btnColor"
+                        @click="$refs.menu.save(startDate)"
+                        >OK</v-btn
+                      >
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col>
+                  <v-menu
+                    ref="menuTime1"
+                    v-model="menuTime1"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    :return-value.sync="startTime"
+                    transition="scale-transition"
+                    offset-y
+                    max-width="290px"
+                    min-width="290px"
                   >
-                </v-date-picker>
-              </v-menu>
-              <v-menu
-                ref="menu1"
-                v-model="menu1"
-                :close-on-content-click="false"
-                :return-value.sync="endDate"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="endDate"
-                    label="結束時間"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  color="btnColor"
-                  v-model="endDate"
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn text color="btnColor" @click="menu1 = false"
-                    >Cancel</v-btn
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="startTime"
+                        label="開始時間"
+                        prepend-icon="mdi-clock"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-time-picker
+                      color="secondary"
+                      v-if="menuTime1"
+                      v-model="startTime"
+                      full-width
+                      @click:minute="$refs.menuTime1.save(startTime)"
+                    ></v-time-picker>
+                  </v-menu>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-menu
+                    ref="menu1"
+                    v-model="menu1"
+                    :close-on-content-click="false"
+                    :return-value.sync="endDate"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
                   >
-                  <v-btn
-                    text
-                    color="btnColor"
-                    @click="$refs.menu1.save(endDate)"
-                    >OK</v-btn
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="endDate"
+                        label="結束時間"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      color="btnColor"
+                      v-model="endDate"
+                      no-title
+                      scrollable
+                    >
+                      <v-spacer></v-spacer>
+                      <v-btn text color="btnColor" @click="menu1 = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="btnColor"
+                        @click="$refs.menu1.save(endDate)"
+                        >OK</v-btn
+                      >
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col>
+                  <v-menu
+                    ref="menuTime2"
+                    v-model="menuTime2"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    :return-value.sync="endTime"
+                    transition="scale-transition"
+                    offset-y
+                    max-width="290px"
+                    min-width="290px"
                   >
-                </v-date-picker>
-              </v-menu>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="endTime"
+                        label="結束時間"
+                        prepend-icon="mdi-clock"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-time-picker
+                      color="secondary"
+                      v-if="menuTime2"
+                      v-model="endTime"
+                      full-width
+                      @click:minute="$refs.menuTime2.save(endTime)"
+                    ></v-time-picker>
+                  </v-menu>
+                </v-col>
+              </v-row>
             </v-container>
           </v-card-text>
           <v-card-actions>
@@ -151,31 +221,36 @@ export default {
   components: {},
   data() {
     return {
-      hex: "#000000",
       name: "",
       details: "",
       poster: "NPC Game Design",
       location: "",
       color: "#000000",
+      hex: "#000000",
       dialog: false,
+      startTime: null,
+      endTime: null,
       startDate: new Date().toISOString().substr(0, 10),
       endDate: new Date().toISOString().substr(0, 10),
       platte: false,
       menu: false,
-      menu1: false
+      menu1: false,
+      menuTime1: false,
+      menuTime2: false
     };
   },
   methods: {
     add() {
-      this.dialog = false;
+      let vm = this;
+      vm.dialog = false;
       let event = {
-        name: this.name,
-        details: this.details,
-        start: this.startDate,
-        end: this.endDate,
-        poster: this.poster,
-        location: this.location,
-        color: this.color
+        name: vm.name,
+        details: vm.details,
+        start: vm.startDate + " " + vm.startTime,
+        end: vm.endDate + " " + vm.endTime,
+        poster: vm.poster,
+        location: vm.location,
+        color: vm.color
       };
       addEvent(event);
     }
