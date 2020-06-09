@@ -96,7 +96,7 @@
           </v-row>
         </v-card-text>
         <v-card-text>
-          <v-row>
+          <v-row v-if="selectedEvent.location">
             <v-col cols="1">
               <v-icon>mdi-map-marker</v-icon>
             </v-col>

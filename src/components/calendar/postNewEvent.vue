@@ -125,7 +125,10 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-btn :color="color" v-on="on">{{ showColor }}</v-btn>
+                <v-icon :color="color">mdi-square</v-icon>
+                <v-btn :color="color" outlined v-on="on" elevation="0">{{
+                  showColor
+                }}</v-btn>
               </template>
               <v-color-picker v-model="color"></v-color-picker>
             </v-menu>
@@ -148,12 +151,12 @@ export default {
   components: {},
   data() {
     return {
-      hex: "#ffffff",
+      hex: "#000000",
       name: "",
       details: "",
       poster: "NPC Game Design",
       location: "",
-      color: "#ffffff",
+      color: "#000000",
       dialog: false,
       startDate: new Date().toISOString().substr(0, 10),
       endDate: new Date().toISOString().substr(0, 10),
