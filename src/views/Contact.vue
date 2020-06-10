@@ -9,6 +9,9 @@ import contactForm from "@/components/forms/contact.vue";
 export default {
   name: "Contact",
   components: { contactForm },
-  methods: {}
+  methods: {},
+  mounted() {
+    this.$store.commit("setActivedPage", "/Contact");
+  }
 };
 </script>

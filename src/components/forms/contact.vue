@@ -41,7 +41,12 @@
       </v-card>
       <v-row style="position:relative;margin-top:20px">
         <v-col>
-          <v-btn color="secondary" class="mr-4" @click="send" elevation="0">
+          <v-btn
+            color="btnColor"
+            class="mr-4 white--text"
+            @click="send"
+            elevation="0"
+          >
             提交
           </v-btn>
         </v-col>

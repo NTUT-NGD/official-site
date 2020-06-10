@@ -72,7 +72,7 @@
             </v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text>
+        <v-card-text class="primary">
           <v-row>
             <v-col cols="1">
               <v-icon :color="selectedEvent.color">mdi-checkbox-blank</v-icon>
@@ -96,7 +96,7 @@
           </v-row>
         </v-card-text>
         <v-card-text>
-          <v-row>
+          <v-row v-if="selectedEvent.location">
             <v-col cols="1">
               <v-icon>mdi-map-marker</v-icon>
             </v-col>
@@ -120,6 +120,7 @@
 
 <script>
 import { retrive } from "@/api/retriveData/retrive.js";
+
 export default {
   data() {
     return {
@@ -148,6 +149,7 @@ export default {
       ]
     };
   },
+  components: {},
   computed: {
     title() {
       const { start, end } = this;
@@ -178,6 +180,7 @@ export default {
   mounted() {
     this.$refs.calendar.checkChange();
     this.setEvenets();
+    this.$store.commit("setActivedPage", "/Calendar");
   },
   methods: {
     async setEvenets() {

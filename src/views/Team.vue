@@ -1,3 +1,18 @@
 <template>
-  <div>team</div>
+  <div></div>
 </template>
+
+<script>
+export default {
+  name: "teams",
+  components: {},
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {
+    this.$store.commit("setActivedPage", "/Teams");
+  },
+  computed: {}
+};
+</script>

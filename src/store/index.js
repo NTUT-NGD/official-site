@@ -4,8 +4,14 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    activedPage: ""
+  },
+  mutations: {
+    setActivedPage(state, val) {
+      state.activedPage = val;
+    }
+  },
   actions: {},
   modules: {}
 });
