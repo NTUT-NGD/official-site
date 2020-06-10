@@ -11,7 +11,7 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/Teams");
+    this.$store.commit("setActivedPage", "/teams");
   },
   computed: {}
 };

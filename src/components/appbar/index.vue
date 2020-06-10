@@ -46,12 +46,12 @@ export default {
       chosenBtn: "",
       items: [
         { name: "首頁", src: "/" },
-        { name: "關於社團", src: "/About" },
-        { name: "遊戲作品", src: "/Games" },
-        { name: "創作專案", src: "/Teams" },
-        { name: "社團行事曆", src: "/Calendar" },
-        { name: "聯絡我們", src: "/Contact" },
-        { name: "加入社團", src: "/Join" }
+        { name: "關於社團", src: "/about" },
+        { name: "遊戲作品", src: "/games" },
+        { name: "創作專案", src: "/teams" },
+        { name: "社團行事曆", src: "/calendar" },
+        { name: "聯絡我們", src: "/contact" },
+        { name: "加入社團", src: "/join" }
       ]
     };
   },

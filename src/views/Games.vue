@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <v-container>
+    <router-view></router-view>
+  </v-container>
 </template>
 
 <script>
@@ -11,7 +13,7 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/Games");
+    this.$store.commit("setActivedPage", "/games");
   },
   computed: {}
 };

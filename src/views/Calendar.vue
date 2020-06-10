@@ -24,7 +24,7 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/Calendar");
+    this.$store.commit("setActivedPage", "/calendar");
   },
   computed: {}
 };

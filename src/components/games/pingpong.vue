@@ -1,17 +1,21 @@
 <template>
-  <div></div>
+  <div>
+    pingpong
+    <v-btn text color="red">
+      asfasf
+    </v-btn>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "about",
   components: {},
   data() {
     return {};
   },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/about");
+    alert(1);
   },
   computed: {}
 };
