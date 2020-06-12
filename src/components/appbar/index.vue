@@ -22,6 +22,12 @@
 
     <v-spacer></v-spacer>
 
+    <v-switch
+      v-model="themeSwitch"
+      label="Dark Mode"
+      color="primary"
+      class="darkThemeSwitch"
+    ></v-switch>
     <v-toolbar-title class="hidden-md-and-down">
       <v-btn
         v-bind:color="getActivedPage === item.src ? 'btnColor' : 'secondary'"
@@ -43,6 +49,7 @@ export default {
   props: ["drawer"],
   data() {
     return {
+      themeSwitch: false,
       chosenBtn: "",
       items: [
         { name: "首頁", src: "/" },
@@ -67,6 +74,11 @@ export default {
     getActivedPage() {
       return this.$store.state.activedPage;
     }
+  },
+  watch: {
+    themeSwitch(newValue) {
+      this.$vuetify.theme.dark = newValue;
+    }
   }
 };
 </script>
@@ -76,6 +88,12 @@ export default {
 html,
 body {
   font-family: "Noto Sans", sans-serif;
+}
+@media only screen and (max-width: 1263px) {
+  .darkThemeSwitch {
+    position: relative;
+    top: 10px;
+  }
 }
 @media only screen and (min-width: 1264px) {
   .appbar {
@@ -90,6 +108,13 @@ body {
   .mark:hover {
     background: linear-gradient(to top, #bbdefb 50%, transparent 50%);
     border-radius: 0;
+  }
+  .darkThemeSwitch {
+    position: fixed;
+    z-index: 1;
+    top: 180px;
+    left: -50px;
+    transform: rotate(90deg);
   }
 }
 </style>
