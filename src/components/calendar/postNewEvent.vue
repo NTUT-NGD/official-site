@@ -223,13 +223,12 @@ export default {
     return {
       name: "",
       details: "",
-      poster: "NPC Game Design",
       location: "",
       color: "#000000",
       hex: "#000000",
       dialog: false,
-      startTime: null,
-      endTime: null,
+      startTime: new Date().getHours() + ":" + new Date().getMinutes(),
+      endTime: new Date().getHours() + ":" + new Date().getMinutes(),
       startDate: new Date().toISOString().substr(0, 10),
       endDate: new Date().toISOString().substr(0, 10),
       platte: false,
@@ -248,7 +247,7 @@ export default {
         details: vm.details,
         start: vm.startDate + " " + vm.startTime,
         end: vm.endDate + " " + vm.endTime,
-        poster: vm.poster,
+        poster: vm.getUser.displayName,
         location: vm.location,
         color: vm.color
       };
@@ -276,6 +275,9 @@ export default {
         null,
         2
       );
+    },
+    getUser() {
+      return this.$store.state.user;
     }
   }
 };

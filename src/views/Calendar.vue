@@ -2,7 +2,7 @@
   <div class="calendar">
     <v-container>
       <calendar />
-      <post />
+      <post v-if="getAuth && getAdmin" />
     </v-container>
   </div>
 </template>
@@ -27,6 +27,13 @@ export default {
     this.$store.commit("setActivedPage", "/calendar");
     document.title = "Calendar | NGC";
   },
-  computed: {}
+  computed: {
+    getAuth() {
+      return this.$store.state.user;
+    },
+    getAdmin() {
+      return this.$store.state.isAdmin;
+    }
+  }
 };
 </script>

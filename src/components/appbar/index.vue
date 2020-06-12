@@ -40,13 +40,16 @@
         {{ item.name }}
       </v-btn>
     </v-toolbar-title>
+    <toolbar />
   </v-app-bar>
 </template>
 
 <script>
+import toolbar from "@/components/appbar/toolbar.vue";
 export default {
   name: "Appbar",
   props: ["drawer"],
+  components: { toolbar },
   data() {
     return {
       themeSwitch: false,
