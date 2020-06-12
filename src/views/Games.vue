@@ -14,6 +14,7 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/games");
+    document.title = "Games | NGC";
   },
   computed: {}
 };

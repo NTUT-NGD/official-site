@@ -12,6 +12,7 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/about");
+    document.title = "About | NGC";
   },
   computed: {}
 };

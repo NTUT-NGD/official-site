@@ -41,7 +41,7 @@
                 required
               ></v-text-field>
               <v-row>
-                <v-col>
+                <v-col cols="12" lg="6" xl="6">
                   <v-menu
                     ref="menu"
                     v-model="menu"
@@ -79,7 +79,7 @@
                     </v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col>
+                <v-col cols="12" lg="6" xl="6">
                   <v-menu
                     ref="menuTime1"
                     v-model="menuTime1"
@@ -112,7 +112,7 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col>
+                <v-col scols="12" lg="6" xl="6">
                   <v-menu
                     ref="menu1"
                     v-model="menu1"
@@ -150,7 +150,7 @@
                     </v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col>
+                <v-col cols="12" lg="6" xl="6">
                   <v-menu
                     ref="menuTime2"
                     v-model="menuTime2"

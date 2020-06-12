@@ -12,6 +12,7 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
+    document.title = "Team | NGC";
   },
   computed: {}
 };

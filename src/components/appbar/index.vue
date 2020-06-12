@@ -88,7 +88,7 @@ body {
     border-color: transparent;
   }
   .mark:hover {
-    background: linear-gradient(to top, #5e92f3 50%, transparent 50%);
+    background: linear-gradient(to top, #bbdefb 50%, transparent 50%);
     border-radius: 0;
   }
 }

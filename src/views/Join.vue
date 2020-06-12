@@ -12,6 +12,7 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/join");
+    document.title = "Join | NGC";
   }
 };
 </script>

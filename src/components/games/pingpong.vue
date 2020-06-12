@@ -1,10 +1,7 @@
 <template>
-  <div>
-    pingpong
-    <v-btn text color="red">
-      asfasf
-    </v-btn>
-  </div>
+  <v-app>
+    <p>test</p>
+  </v-app>
 </template>
 
 <script>
@@ -14,9 +11,7 @@ export default {
     return {};
   },
   methods: {},
-  mounted() {
-    alert(1);
-  },
+  mounted() {},
   computed: {}
 };
 </script>
