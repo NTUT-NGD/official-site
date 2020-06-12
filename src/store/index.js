@@ -5,11 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    activedPage: ""
+    activedPage: "",
+    games: null
   },
   mutations: {
     setActivedPage(state, val) {
       state.activedPage = val;
+    },
+    setGames(state, val) {
+      state.games = val;
     }
   },
   actions: {},

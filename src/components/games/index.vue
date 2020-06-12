@@ -18,13 +18,12 @@
         <v-card elevation="0">
           <v-card-title class="headline">
             <v-btn text class="pa-0" :to="'/games/' + item.name.toLowerCase()">
-              <span>
-                {{ item.name }}
-              </span>
+              <span>{{ item.name }}</span>
             </v-btn>
           </v-card-title>
           <v-card-text>
-            License: {{ item.license }}<br />
+            License: {{ item.license }}
+            <br />
             Recently update:
             {{ item.recentlyUpdate }}
           </v-card-text>
@@ -48,16 +47,26 @@ export default {
   },
   methods: {
     async setgames() {
-      this.games = await retrive("Games");
-      this.games.forEach(async element => {
-        element.imgURL = await retriveImage(element);
-      });
+      let vm = this;
+      if (vm.getGames == null) {
+        vm.games = await retrive("Games");
+        vm.games.forEach(async element => {
+          element.imgURL = await retriveImage(element);
+        });
+        vm.$store.commit("setGames", vm.games);
+      } else {
+        vm.games = vm.getGames;
+      }
     }
   },
   mounted() {
     this.$store.commit("setActivedPage", "/games");
     this.setgames();
   },
-  computed: {}
+  computed: {
+    getGames() {
+      return this.$store.state.games;
+    }
+  }
 };
 </script>
