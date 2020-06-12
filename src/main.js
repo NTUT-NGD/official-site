@@ -16,7 +16,17 @@ new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    store.commit("setLoading", true);
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        store.dispatch("autoSignIn", firebaseUser);
+      } else {
+        store.commit("setLoading", false);
+      }
+    });
+  }
 }).$mount("#app");
 
 Vue.use(VueGAPI, gconfig);
