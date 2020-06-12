@@ -19,7 +19,24 @@ const routes = [
   {
     path: "/games",
     name: "Games",
-    component: () => import("../views/Games.vue")
+    component: () => import("../views/Games.vue"),
+    children: [
+      {
+        path: "",
+        name: "",
+        component: () => import("../components/games/index.vue")
+      },
+      {
+        path: "pingpong",
+        name: "pingpong",
+        component: () => import("../components/games/pingpong.vue")
+      },
+      {
+        path: "lomo",
+        name: "lomo",
+        component: () => import("../components/games/lomo.vue")
+      }
+    ]
   },
   {
     path: "/teams",

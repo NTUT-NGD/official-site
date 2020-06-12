@@ -24,7 +24,8 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/Calendar");
+    this.$store.commit("setActivedPage", "/calendar");
+    document.title = "Calendar | NGC";
   },
   computed: {}
 };

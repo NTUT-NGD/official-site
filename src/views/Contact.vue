@@ -11,7 +11,8 @@ export default {
   components: { contactForm },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/Contact");
+    this.$store.commit("setActivedPage", "/contact");
+    document.title = "Contact | NGC";
   }
 };
 </script>

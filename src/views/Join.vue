@@ -11,7 +11,8 @@ export default {
   components: { joinForm },
   methods: {},
   mounted() {
-    this.$store.commit("setActivedPage", "/Join");
+    this.$store.commit("setActivedPage", "/join");
+    document.title = "Join | NGC";
   }
 };
 </script>

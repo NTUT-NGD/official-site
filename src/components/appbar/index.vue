@@ -22,6 +22,12 @@
 
     <v-spacer></v-spacer>
 
+    <v-switch
+      v-model="themeSwitch"
+      label="Dark Mode"
+      color="primary"
+      class="darkThemeSwitch"
+    ></v-switch>
     <v-toolbar-title class="hidden-md-and-down">
       <v-btn
         v-bind:color="getActivedPage === item.src ? 'btnColor' : 'secondary'"
@@ -43,15 +49,16 @@ export default {
   props: ["drawer"],
   data() {
     return {
+      themeSwitch: false,
       chosenBtn: "",
       items: [
         { name: "首頁", src: "/" },
-        { name: "關於社團", src: "/About" },
-        { name: "遊戲作品", src: "/Games" },
-        { name: "創作專案", src: "/Teams" },
-        { name: "社團行事曆", src: "/Calendar" },
-        { name: "聯絡我們", src: "/Contact" },
-        { name: "加入社團", src: "/Join" }
+        { name: "關於社團", src: "/about" },
+        { name: "遊戲作品", src: "/games" },
+        { name: "創作專案", src: "/teams" },
+        { name: "社團行事曆", src: "/calendar" },
+        { name: "聯絡我們", src: "/contact" },
+        { name: "加入社團", src: "/join" }
       ]
     };
   },
@@ -67,6 +74,11 @@ export default {
     getActivedPage() {
       return this.$store.state.activedPage;
     }
+  },
+  watch: {
+    themeSwitch(newValue) {
+      this.$vuetify.theme.dark = newValue;
+    }
   }
 };
 </script>
@@ -76,6 +88,12 @@ export default {
 html,
 body {
   font-family: "Noto Sans", sans-serif;
+}
+@media only screen and (max-width: 1263px) {
+  .darkThemeSwitch {
+    position: relative;
+    top: 10px;
+  }
 }
 @media only screen and (min-width: 1264px) {
   .appbar {
@@ -88,8 +106,15 @@ body {
     border-color: transparent;
   }
   .mark:hover {
-    background: linear-gradient(to top, #5e92f3 50%, transparent 50%);
+    background: linear-gradient(to top, #bbdefb 50%, transparent 50%);
     border-radius: 0;
+  }
+  .darkThemeSwitch {
+    position: fixed;
+    z-index: 1;
+    top: 180px;
+    left: -50px;
+    transform: rotate(90deg);
   }
 }
 </style>

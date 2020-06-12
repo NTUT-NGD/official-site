@@ -6,15 +6,13 @@
       @drawerState="setDrawer"
       class="hidden-lg-and-up"
     />
-    <darkThemeSwitch />
-    <v-content>
+    <v-content style="height: 100vh; max-height: 100%;">
       <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import darkThemeSwitch from "@/components/appbar/switch.vue";
 import appbar from "@/components/appbar/index.vue";
 import drawer from "@/components/appbar/drawer.vue";
 export default {
@@ -25,7 +23,6 @@ export default {
     };
   },
   components: {
-    darkThemeSwitch,
     appbar,
     drawer
   },
