@@ -9,7 +9,12 @@
         v-for="(item, index) in games"
         :key="index"
       >
-        <v-img v-if="item.imgURL" :src="item.imgURL" aspect-ratio="1.7"></v-img>
+        <v-img
+          v-if="item.imgURL"
+          :src="item.imgURL"
+          aspect-ratio="1.7"
+          class="pa-0"
+        ></v-img>
         <v-skeleton-loader
           class="mx-auto"
           type="image"

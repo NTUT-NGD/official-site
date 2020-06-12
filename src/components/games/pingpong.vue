@@ -1,36 +1,83 @@
 <template>
-  <v-app>
-    <v-row justify="center">
+  <v-container style="height: 100vh; max-height: 100%;">
+    <v-row justify="end">
       <v-col cols="12" md="6" sm="6" lg="6">
-        <v-card elevation="0">
-          <v-card-title class="headline">
-            <h1 style="position:relative;left:-20px">
-              {{ game.name }}<v-card-text>{{ game.madeBy }}</v-card-text>
-            </h1>
-          </v-card-title>
-          <v-card-title>
-            <h5 style="font-size:15px">{{ game.content }}</h5>
-          </v-card-title>
-          <v-card-title>
-            <v-btn fab icon color="primary">
-              <v-icon color="btnColor" x-large>mdi-github</v-icon>
-            </v-btn>
-            <v-btn fab icon color="primary">
-              <v-icon color="btnColor" x-large>mdi-image</v-icon>
-            </v-btn>
-          </v-card-title>
-        </v-card>
+        <h1
+          style="position:relative;left:-20px;font-size:50px"
+          class="text-right"
+        >
+          <span class="hidden-sm-and-up caption">{{ game.madeBy }}</span>
+          {{ game.name }}
+        </h1>
+        <p
+          class="hidden-xs-only text-right"
+          style="position:relative;left:-20px;"
+        >
+          {{ game.madeBy }}
+        </p>
+        <v-card-title>
+          <h5 style="font-size:15px" class="hidden-sm-and-up">
+            {{ game.content }}
+          </h5>
+        </v-card-title>
+        <h5 style="font-size:15px" class="text-right hidden-xs-only">
+          {{ game.content }}
+        </h5>
       </v-col>
       <v-col cols="12" md="6" sm="6" lg="6">
-        <v-img v-if="game.imgURL" :src="game.imgURL" aspect-ratio="1.7"></v-img>
-        <v-skeleton-loader
-          class="mx-auto"
-          type="image"
-          v-if="!game.imgURL"
-        ></v-skeleton-loader>
+        <div class="hidden-sm-and-up" style="position:relative;top:-100px;">
+          <v-row class="d-flex flex-row-reverse">
+            <v-btn icon color="primary" :href="game.github">
+              <v-icon color="secondary">
+                mdi-github
+              </v-icon>
+            </v-btn>
+            <v-btn icon color="primary" :href="game.materials">
+              <v-icon color="secondary">
+                mdi-image
+              </v-icon>
+            </v-btn>
+          </v-row>
+
+          <v-img
+            v-if="game.imgURL"
+            :src="game.imgURL"
+            aspect-ratio="1.7"
+          ></v-img>
+          <v-skeleton-loader
+            class="mx-auto"
+            type="image"
+            v-if="!game.imgURL"
+          ></v-skeleton-loader>
+        </div>
+        <div class="hidden-xs-only">
+          <v-row class="d-flex flex-row-reverse">
+            <v-btn icon color="primary" :href="game.github">
+              <v-icon color="secondary">
+                mdi-github
+              </v-icon>
+            </v-btn>
+            <v-btn icon color="primary" :href="game.materials">
+              <v-icon color="secondary">
+                mdi-image
+              </v-icon>
+            </v-btn>
+          </v-row>
+
+          <v-img
+            v-if="game.imgURL"
+            :src="game.imgURL"
+            aspect-ratio="1.7"
+          ></v-img>
+          <v-skeleton-loader
+            class="mx-auto"
+            type="image"
+            v-if="!game.imgURL"
+          ></v-skeleton-loader>
+        </div>
       </v-col>
     </v-row>
-  </v-app>
+  </v-container>
 </template>
 
 <script>
