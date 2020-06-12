@@ -6,7 +6,7 @@
       @drawerState="setDrawer"
       class="hidden-lg-and-up"
     />
-    <v-content>
+    <v-content style="height: 100vh; max-height: 100%;">
       <router-view></router-view>
     </v-content>
   </v-app>

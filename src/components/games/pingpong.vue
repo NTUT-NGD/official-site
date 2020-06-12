@@ -1,5 +1,5 @@
 <template>
-  <v-container style="height: 100vh; max-height: 100%;">
+  <v-container>
     <v-row justify="end">
       <v-col cols="12" md="6" sm="6" lg="6">
         <h1
@@ -25,55 +25,44 @@
         </h5>
       </v-col>
       <v-col cols="12" md="6" sm="6" lg="6">
-        <div class="hidden-sm-and-up" style="position:relative;top:-100px;">
-          <v-row class="d-flex flex-row-reverse">
-            <v-btn icon color="primary" :href="game.github">
-              <v-icon color="secondary">
-                mdi-github
-              </v-icon>
-            </v-btn>
-            <v-btn icon color="primary" :href="game.materials">
-              <v-icon color="secondary">
-                mdi-image
-              </v-icon>
-            </v-btn>
-          </v-row>
+        <v-row class="d-flex flex-row-reverse">
+          <v-btn icon color="primary" :href="game.github">
+            <v-icon color="secondary">
+              mdi-github
+            </v-icon>
+          </v-btn>
+          <v-btn icon color="primary" :href="game.materials">
+            <v-icon color="secondary">
+              mdi-image
+            </v-icon>
+          </v-btn>
+        </v-row>
 
-          <v-img
-            v-if="game.imgURL"
-            :src="game.imgURL"
-            aspect-ratio="1.7"
-          ></v-img>
-          <v-skeleton-loader
-            class="mx-auto"
-            type="image"
-            v-if="!game.imgURL"
-          ></v-skeleton-loader>
-        </div>
-        <div class="hidden-xs-only">
-          <v-row class="d-flex flex-row-reverse">
-            <v-btn icon color="primary" :href="game.github">
-              <v-icon color="secondary">
-                mdi-github
-              </v-icon>
-            </v-btn>
-            <v-btn icon color="primary" :href="game.materials">
-              <v-icon color="secondary">
-                mdi-image
-              </v-icon>
-            </v-btn>
-          </v-row>
-
-          <v-img
-            v-if="game.imgURL"
-            :src="game.imgURL"
-            aspect-ratio="1.7"
-          ></v-img>
-          <v-skeleton-loader
-            class="mx-auto"
-            type="image"
-            v-if="!game.imgURL"
-          ></v-skeleton-loader>
+        <v-img
+          v-if="game.imgURL"
+          style="z-index:10"
+          :src="game.imgURL"
+          aspect-ratio="1.7"
+        ></v-img>
+        <v-skeleton-loader
+          class="mx-auto"
+          type="image"
+          v-if="!game.imgURL"
+        ></v-skeleton-loader>
+        <div
+          class="hidden-xs-only"
+          style="z-index:0;position:relative;top:-10%;left:-10%"
+        >
+          <div
+            class="quaternary d-flex align-end mb-6"
+            style="height:100px;width:300px"
+          >
+            <span
+              style="font-size:15px;position:relative;top:-10px;left:15px"
+              class="tertiary--text"
+              >{{ game.license }}
+            </span>
+          </div>
         </div>
       </v-col>
     </v-row>
