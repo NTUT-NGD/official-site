@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <v-container>
-      <game />
-    </v-container>
-  </div>
+  <div></div>
 </template>
 
 <script>
-import game from "@/components/about/game.vue";
 export default {
   name: "about",
-  components: { game },
+  components: {},
   data() {
     return {};
   },
