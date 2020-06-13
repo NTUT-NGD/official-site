@@ -5,17 +5,28 @@
         hide-delimiters
         cycle
         show-arrows-on-hover
+        continuous
         height="100%"
-        aspect-ratio="1.7"
       >
         <v-carousel-item
           v-for="(item, i) in getGames"
           :key="i"
           :to="'/games/' + item.name.toLowerCase()"
         >
-          <v-img :src="item.imgURL" width="100%" height="100%"> </v-img>
+          <v-row justify="center">
+            <v-col cols="12" lg="8">
+              <v-img
+                :src="item.imgURL"
+                max-width="1000"
+                min-height="300"
+                max-height="500"
+              >
+              </v-img>
+            </v-col>
+          </v-row>
         </v-carousel-item>
       </v-carousel>
+      <hr />
     </v-container>
   </div>
 </template>
@@ -25,9 +36,7 @@ export default {
   name: "home",
   components: {},
   data() {
-    return {
-      slideIndex: 1
-    };
+    return {};
   },
   methods: {},
   mounted() {
