@@ -19,6 +19,7 @@ new Vue({
   render: h => h(App),
   created() {
     store.commit("setLoading", true);
+    store.commit("setDatas");
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
         store.dispatch("autoSignIn", firebaseUser);

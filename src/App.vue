@@ -55,6 +55,9 @@ export default {
     getLoading() {
       return this.$store.state.pageLoading;
     }
+  },
+  mounted() {
+    console.log(1);
   }
 };
 </script>

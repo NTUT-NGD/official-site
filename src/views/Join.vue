@@ -1,7 +1,7 @@
 <template>
-  <div class="join">
+  <v-container class="join">
     <joinForm />
-  </div>
+  </v-container>
 </template>
 
 <script>

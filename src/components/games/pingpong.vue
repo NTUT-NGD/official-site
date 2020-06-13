@@ -1,37 +1,37 @@
 <template>
   <v-container>
-    <v-row justify="end">
-      <v-col cols="12" md="6" sm="6" lg="6">
+    <v-row v-for="(item, index) in getGames" :key="index">
+      <v-col cols="12" md="6" sm="6" lg="6" v-if="item.name == name">
         <h1
           style="position:relative;left:-20px;font-size:50px"
           class="text-right"
         >
-          <span class="hidden-sm-and-up caption">{{ game.madeBy }}</span>
-          {{ game.name }}
+          <span class="hidden-sm-and-up caption">{{ item.madeBy }}</span>
+          {{ item.name }}
         </h1>
         <p
           class="hidden-xs-only text-right"
           style="position:relative;left:-20px;"
         >
-          {{ game.madeBy }}
+          {{ item.madeBy }}
         </p>
         <v-card-title>
           <h5 style="font-size:15px" class="hidden-sm-and-up">
-            {{ game.content }}
+            {{ item.content }}
           </h5>
         </v-card-title>
         <h5 style="font-size:15px" class="text-right hidden-xs-only">
-          {{ game.content }}
+          {{ item.content }}
         </h5>
       </v-col>
-      <v-col cols="12" md="6" sm="6" lg="6">
+      <v-col cols="12" md="6" sm="6" lg="6" v-if="item.name == name">
         <v-row class="d-flex flex-row-reverse">
-          <v-btn icon color="primary" :href="game.github">
+          <v-btn icon color="primary" :href="item.github">
             <v-icon color="secondary">
               mdi-github
             </v-icon>
           </v-btn>
-          <v-btn icon color="primary" :href="game.materials">
+          <v-btn icon color="primary" :href="item.materials">
             <v-icon color="secondary">
               mdi-image
             </v-icon>
@@ -39,15 +39,15 @@
         </v-row>
 
         <v-img
-          v-if="game.imgURL"
-          style="z-index:10"
-          :src="game.imgURL"
+          v-if="item.imgURL"
+          style="position:relative;z-index:1"
+          :src="item.imgURL"
           aspect-ratio="1.7"
         ></v-img>
         <v-skeleton-loader
           class="mx-auto"
           type="image"
-          v-if="!game.imgURL"
+          v-if="!item.imgURL"
         ></v-skeleton-loader>
         <div
           class="hidden-xs-only"
@@ -60,7 +60,7 @@
             <span
               style="font-size:15px;position:relative;top:-10px;left:15px"
               class="tertiary--text"
-              >{{ game.license }}
+              >{{ item.license }}
             </span>
           </div>
         </div>
@@ -75,24 +75,12 @@ export default {
   components: {},
   data() {
     return {
-      name: "pingpong",
+      name: "PingPong",
       game: []
     };
   },
-  methods: {
-    async setGame() {
-      let vm = this;
-      let games = vm.getGames;
-      games.forEach(element => {
-        if (element.name.toLowerCase() == vm.name.toLowerCase()) {
-          vm.game = element;
-        }
-      });
-    }
-  },
-  mounted() {
-    this.setGame();
-  },
+  methods: {},
+  mounted() {},
   computed: {
     getGames() {
       return this.$store.state.games;

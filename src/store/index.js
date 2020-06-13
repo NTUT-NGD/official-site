@@ -6,6 +6,8 @@ Vue.use(Vuex);
 import { signin } from "@/api/auth/signin.js";
 import { signout } from "@/api/auth/signout.js";
 import { register } from "@/api/auth/register.js";
+import { retrive } from "@/api/retriveData/retrive.js";
+import { retriveImage } from "@/api/retriveData/retriveImage.js";
 
 export default new Vuex.Store({
   state: {
@@ -14,7 +16,8 @@ export default new Vuex.Store({
     isAdmin: false,
     pageLoading: false,
     activedPage: "",
-    games: null
+    games: null,
+    events: null
   },
   mutations: {
     setUser(state, payload) {
@@ -32,8 +35,12 @@ export default new Vuex.Store({
     setActivedPage(state, val) {
       state.activedPage = val;
     },
-    setGames(state, val) {
-      state.games = val;
+    async setDatas(state) {
+      state.games = await retrive("Games");
+      state.games.forEach(async element => {
+        element.imgURL = await retriveImage(element);
+      });
+      state.events = await retrive("Calendar");
     }
   },
   actions: {

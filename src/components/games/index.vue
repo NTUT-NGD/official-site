@@ -3,17 +3,18 @@
     <v-row justify="center">
       <v-col
         cols="12"
-        md="6"
-        sm="6"
+        sm="8"
+        md="8"
         lg="6"
-        v-for="(item, index) in games"
+        v-for="(item, index) in getGames"
         :key="index"
       >
         <v-img
           v-if="item.imgURL"
           :src="item.imgURL"
           aspect-ratio="1.7"
-          class="pa-0"
+          class="pa-0 ma-0"
+          style="z-index:1"
         ></v-img>
         <v-skeleton-loader
           class="mx-auto"
@@ -21,11 +22,14 @@
           v-if="!item.imgURL"
         ></v-skeleton-loader>
         <v-card elevation="0">
-          <v-card-title class="headline">
-            <v-btn text class="pa-0" :to="'/games/' + item.name.toLowerCase()">
-              <span>{{ item.name }}</span>
-            </v-btn>
-          </v-card-title>
+          <v-btn
+            text
+            class="pa-0"
+            color="rgb(0, 0, 0, 0)"
+            :to="'/games/' + item.name.toLowerCase()"
+          >
+            <h2 class="secondary--text">{{ item.name }}</h2>
+          </v-btn>
           <v-card-text>
             License: {{ item.license }}
             <br />
@@ -39,9 +43,6 @@
 </template>
 
 <script>
-import { retrive } from "@/api/retriveData/retrive.js";
-import { retriveImage } from "@/api/retriveData/retriveImage.js";
-
 export default {
   name: "Games",
   components: {},
@@ -50,23 +51,9 @@ export default {
       games: []
     };
   },
-  methods: {
-    async setgames() {
-      let vm = this;
-      if (vm.getGames == null) {
-        vm.games = await retrive("Games");
-        vm.games.forEach(async element => {
-          element.imgURL = await retriveImage(element);
-        });
-        vm.$store.commit("setGames", vm.games);
-      } else {
-        vm.games = vm.getGames;
-      }
-    }
-  },
+  methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/games");
-    this.setgames();
   },
   computed: {
     getGames() {
