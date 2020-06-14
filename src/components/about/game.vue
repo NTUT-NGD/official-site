@@ -20,8 +20,12 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <p>北科遊戲社</p>
-        <p>成立日期 108-2</p>
+        <div style="border: 1px dashed black;" class="pa-1">
+          <p>Dialog</p>
+          <p>
+            ????????????????????????????????????????????????????????????????????????
+          </p>
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -78,6 +82,8 @@ export default {
       this.context.fillRect(205, 100, 50, 50);
       this.context.fillStyle = "#3949ab";
       this.context.fillRect(305, 100, 50, 50);
+      this.context.fillStyle = "#ffb300";
+      this.context.fillRect(405, 100, 50, 50);
       this.context.fillStyle = "#000000";
       this.context.fillRect(this.position.x, this.position.y, 20, 20);
     });
