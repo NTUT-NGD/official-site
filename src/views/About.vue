@@ -9,7 +9,24 @@
         </v-col>
       </v-row>
       <v-row justify="center">
-        <game />
+        <game class="hidden-xs-only" />
+        <v-col cols="12" class="hidden-sm-and-up">
+          <div style="border: 1px dashed black;" class="pa-5">
+            <p>Dialog</p>
+            <p>
+              There is a secret on larger screen.......
+            </p>
+            <p>
+              About who we are.......
+            </p>
+            <p>
+              Take the adventure.......
+            </p>
+            <p>
+              And find out the truth.......
+            </p>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
   </div>
