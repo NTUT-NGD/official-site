@@ -8,7 +8,8 @@ module.exports = {
         "/",
         "/about",
         "/games",
-        "/about",
+        "/games/pingpong",
+        "/games/lomo",
         "/teams",
         "/calendar",
         "/contact",
@@ -18,10 +19,6 @@ module.exports = {
       headless: true,
       onlyProduction: true
     }
-  },
-
-  devServer: {
-    proxy: "http://localhost:8080"
   },
 
   publicPath: process.env.NODE_ENV === "production" ? "/official-site/" : "/"
