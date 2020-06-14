@@ -2,7 +2,7 @@
   <div class="home">
     <v-container>
       <v-carousel
-        class="primary"
+        class="quaternary"
         :delimiter-icon="icons[0].icon"
         hide-delimiter-background
         cycle
