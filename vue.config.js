@@ -4,15 +4,21 @@ module.exports = {
   pluginOptions: {
     prerenderSpa: {
       registry: undefined,
-      renderRoutes: ["/"],
+      renderRoutes: [
+        "/",
+        "/about",
+        "/games",
+        "/games/pingpong",
+        "/games/lomo",
+        "/teams",
+        "/calendar",
+        "/contact",
+        "/join"
+      ],
       useRenderEvent: true,
       headless: true,
       onlyProduction: true
     }
-  },
-
-  devServer: {
-    proxy: "http://localhost:8080"
   },
 
   publicPath: process.env.NODE_ENV === "production" ? "/official-site/" : "/"

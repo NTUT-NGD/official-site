@@ -17,7 +17,9 @@ export default new Vuex.Store({
     pageLoading: false,
     activedPage: "",
     games: null,
-    events: null
+    events: null,
+    adventureX: 640,
+    adventureY: 480
   },
   mutations: {
     setUser(state, payload) {

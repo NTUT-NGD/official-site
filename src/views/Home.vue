@@ -2,7 +2,9 @@
   <div class="home">
     <v-container>
       <v-carousel
-        hide-delimiters
+        class="primary"
+        :delimiter-icon="icons[0].icon"
+        hide-delimiter-background
         cycle
         show-arrows-on-hover
         continuous
@@ -36,7 +38,16 @@ export default {
   name: "home",
   components: {},
   data() {
-    return {};
+    return {
+      selectIcon: "mdi-delta",
+      icons: [
+        { icon: "mdi-delta" },
+        { icon: "mdi-checkbox-blank-outline" },
+        { icon: "mdi-circle-outline" },
+        { icon: "mdi-close" },
+        "mdi-gamepad"
+      ]
+    };
   },
   methods: {},
   mounted() {
