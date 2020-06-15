@@ -11,6 +11,7 @@ module.exports = {
         "/games/pingpong",
         "/games/lomo",
         "/teams",
+        "/teams/project",
         "/calendar",
         "/contact",
         "/join"
