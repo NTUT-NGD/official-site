@@ -51,7 +51,10 @@ export default {
           tags: ["2D"],
           platform: ["PS4", "Switch"],
           inFinished: "否",
-          parties: [{ name: "PlayerA" }, { name: "PlayerB" }]
+          parties: [{ name: "PlayerA" }, { name: "PlayerB" }],
+          googleDriveUrl: "https://drive.google.com/drive/my-drive",
+          githubUrl: "https://github.com/",
+          contactUrl: "https://discord.com/"
         }
       ]
     };
