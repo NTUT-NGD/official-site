@@ -1,6 +1,26 @@
 <template>
   <v-container>
     <router-view></router-view>
+    <v-data-table
+      :footer-props="{
+        'items-per-page-options': [15]
+      }"
+      disable-sort
+      :headers="headers"
+      :items="projects"
+      @click:row="handClick"
+    >
+      <template slot="items" slot-scope="props">
+        <tr>
+          <td>{{ props.item.name }}</td>
+          <td>{{ props.item.intro }}</td>
+          <td>{{ props.item.recruiting }}</td>
+          <td>{{ props.item.platform }}</td>
+          <td>{{ props.item.tags }}</td>
+          <td>{{ props.item.inFinished }}</td>
+        </tr>
+      </template>
+    </v-data-table>
   </v-container>
 </template>
 
@@ -73,7 +93,14 @@ export default {
       ]
     };
   },
-  methods: {},
+  methods: {
+    handClick(value) {
+      this.$router.push({
+        name: "project",
+        params: { data: value }
+      });
+    }
+  },
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
