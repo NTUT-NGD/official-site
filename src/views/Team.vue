@@ -9,69 +9,7 @@ export default {
   name: "teams",
   components: {},
   data() {
-    return {
-      page: 1,
-      headers: [
-        {
-          text: "專案名稱",
-          align: "start",
-          sortable: false,
-          value: "name"
-        },
-        { text: "簡介", value: "intro" },
-        { text: "平台", value: "platform" },
-        { text: "標籤", value: "tags" },
-        { text: "招募中", value: "recruiting" },
-        { text: "完成", value: "inFinished" }
-      ],
-      projects: [
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        }
-      ]
-    };
+    return {};
   },
   methods: {},
   mounted() {
@@ -81,12 +19,3 @@ export default {
   computed: {}
 };
 </script>
-
-<style>
-td {
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-</style>

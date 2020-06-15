@@ -1,7 +1,7 @@
 <template>
   <div v-if="getProject">
     <v-row>
-      <v-col cols="1" sm="3" md="3" lg="3" xl="3"></v-col>
+      <v-col cols="0" sm="3" md="3" lg="3" xl="3"></v-col>
       <v-col cols="11" sm="6" md="6" lg="6" xl="6">
         <v-card elevation="0">
           <v-card-title>
@@ -41,6 +41,7 @@
 
                 <v-card-text>
                   <v-textarea
+                    v-model="introduction"
                     label="請輸入自我介紹（專長、個性、建議或任何您想說的話）"
                   >
                   </v-textarea>
@@ -66,7 +67,7 @@
     <div v-if="isMember">
       <hr />
       <v-row>
-        <v-col cols="1" sm="3" md="3" lg="3" xl="3"></v-col>
+        <v-col cols="0" sm="3" md="3" lg="3" xl="3"></v-col>
         <v-col cols="11" sm="6" md="6" lg="6" xl="6">
           <v-card elevation="0">
             <v-card-title>
@@ -80,19 +81,7 @@
                   :href="getProject.googleDriveUrl"
                 >
                   <span class="secondary--text">
-                    {{ getProject.googleDriveUrl }}
-                  </span></v-btn
-                >
-              </p>
-              <p>
-                Github Repo:
-                <v-btn
-                  text
-                  color="rgb(255, 0, 0, 0.0)"
-                  :href="getProject.githubUrl"
-                >
-                  <span class="secondary--text">
-                    {{ getProject.githubUrl }}
+                    素材連結
                   </span></v-btn
                 >
               </p>
@@ -104,7 +93,7 @@
                   :href="getProject.contactUrl"
                 >
                   <span class="secondary--text">
-                    {{ getProject.contactUrl }}
+                    討論平台
                   </span></v-btn
                 >
               </p>
@@ -117,7 +106,7 @@
       <div v-if="isMember">
         <hr />
         <v-row>
-          <v-col cols="1" sm="3" md="3" lg="3" xl="3"></v-col>
+          <v-col cols="0" sm="3" md="3" lg="3" xl="3"></v-col>
           <v-col cols="11" sm="6" md="6" lg="6" xl="6">
             <v-card elevation="0">
               <v-card-title>
@@ -151,6 +140,7 @@ export default {
       id: 1,
       items: [],
       dialog: false,
+      introduction: "",
       isMember: true, //判斷有沒有權限，要從js抓
       isRecruiting: true, //招募中, 同上
       isCreator: true, //創建者, 同上
