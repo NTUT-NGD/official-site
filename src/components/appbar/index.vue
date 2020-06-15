@@ -14,9 +14,9 @@
         class="hidden-lg-and-up"
       ></v-app-bar-nav-icon>
       <v-btn color="primary" text to="/">
-        <h2 class="secondary--text">
+        <h1 class="secondary--text">
           遊戲設計
-        </h2>
+        </h1>
       </v-btn>
     </v-toolbar-title>
 

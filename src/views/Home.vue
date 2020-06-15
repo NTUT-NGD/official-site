@@ -1,8 +1,11 @@
 <template>
   <div class="home">
     <v-container>
+      <h1 class="about-title text-left">No Game, No Life</h1>
+      <h1 class="about-title-mirror text-left">No Game, No Life</h1>
       <v-carousel
-        class="quaternary"
+        v-if="getGames"
+        class="quinary"
         :delimiter-icon="icons[0].icon"
         hide-delimiter-background
         cycle
@@ -28,7 +31,11 @@
           </v-row>
         </v-carousel-item>
       </v-carousel>
-      <hr />
+      <v-skeleton-loader
+        class="mx-auto"
+        type="image"
+        v-if="!getGames"
+      ></v-skeleton-loader>
     </v-container>
   </div>
 </template>
@@ -62,4 +69,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.about-title {
+  position: relative;
+  font-size: 45px;
+}
+.about-title-mirror {
+  position: relative;
+  top: -30px;
+  opacity: 0.1;
+  font-size: 45px;
+}
+</style>

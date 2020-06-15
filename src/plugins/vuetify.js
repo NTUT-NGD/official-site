@@ -11,13 +11,15 @@ export default new Vuetify({
         secondary: "#263238",
         tertiary: "#eceff1",
         quaternary: "#212121",
+        quinary: "#ffffff",
         btnColor: "#1565c0"
       },
       dark: {
-        primary: "#62727b",
+        primary: "#212121",
         secondary: "#ffffff",
         tertiary: "#000000",
         quaternary: "#fafafa",
+        quinary: "#ffffff",
         btnColor: "#eeffff"
       }
       //quaternary, quinary, senary, septenary, octonary, nonary,

@@ -79,12 +79,18 @@ export default {
         this.$refs.board.width
       );
       this.context.fillStyle = "#e53935";
-      this.context.fillRect(205, 100, 50, 50);
+      this.context.fillRect(0, 100, 50, 1000);
       this.context.fillStyle = "#3949ab";
-      this.context.fillRect(305, 100, 50, 50);
+      this.context.fillRect(70, 0, 70, 70);
+      this.context.fillStyle = "#3949ab";
+      this.context.fillRect(350, 0, 700, 70);
+      this.context.fillStyle = "#e53935";
+      this.context.fillRect(160, 200, 50, 700);
+      this.context.fillStyle = "#e53935";
+      this.context.fillRect(350, 200, 100, 700);
+      this.context.fillStyle = "#e53935";
+      this.context.fillRect(600, 200, 50, 700);
       this.context.fillStyle = "#ffb300";
-      this.context.fillRect(405, 100, 50, 50);
-      this.context.fillStyle = "#000000";
       this.context.fillRect(this.position.x, this.position.y, 20, 20);
     });
   },
