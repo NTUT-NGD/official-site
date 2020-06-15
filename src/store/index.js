@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -10,6 +11,11 @@ import { retrive } from "@/api/retriveData/retrive.js";
 import { retriveImage } from "@/api/retriveData/retriveImage.js";
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState({
+      storage: window.sessionStorage
+    })
+  ],
   state: {
     login: false,
     user: null,
@@ -19,7 +25,8 @@ export default new Vuex.Store({
     games: null,
     events: null,
     adventureX: 640,
-    adventureY: 480
+    adventureY: 480,
+    selectProject: null
   },
   mutations: {
     setUser(state, payload) {
@@ -43,6 +50,9 @@ export default new Vuex.Store({
         element.imgURL = await retriveImage(element);
       });
       state.events = await retrive("Calendar");
+    },
+    setSelectProject(state, val) {
+      state.selectProject = val;
     }
   },
   actions: {
@@ -57,6 +67,9 @@ export default new Vuex.Store({
     userSignOut({ commit }) {
       signout();
       commit("setUser", null);
+    },
+    dispatchSelectProject({ commit }, payload) {
+      commit("setSelectProject", payload);
     }
   },
   modules: {}

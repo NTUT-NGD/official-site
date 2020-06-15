@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <router-view></router-view>
     <v-data-table
       :footer-props="{
         'items-per-page-options': [15]
@@ -47,57 +46,21 @@ export default {
       projects: [
         {
           name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
+          intro: "簡單的小遊戲得斯",
           recruiting: "是",
           tags: ["2D"],
           platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
-        },
-        {
-          name: "Frozen Yogurt",
-          intro:
-            "簡單的小遊戲得斯,簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "是"
+          inFinished: "否",
+          parties: [{ name: "PlayerA" }, { name: "PlayerB" }]
         }
       ]
     };
   },
   methods: {
     handClick(value) {
+      this.$store.dispatch("dispatchSelectProject", value);
       this.$router.push({
-        name: "project",
-        params: { data: value }
+        name: "project"
       });
     }
   },
