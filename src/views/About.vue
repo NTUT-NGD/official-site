@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app>
     <v-container>
       <v-row justify="start">
         <v-col cols>
@@ -29,7 +29,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-app>
 </template>
 
 <script>

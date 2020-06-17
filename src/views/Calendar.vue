@@ -1,10 +1,10 @@
 <template>
-  <div class="calendar">
+  <v-app class="calendar">
     <v-container>
       <calendar />
       <post v-if="getAuth && getAdmin" />
     </v-container>
-  </div>
+  </v-app>
 </template>
 
 <script>

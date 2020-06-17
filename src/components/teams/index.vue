@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-app>
     <v-data-table
       :footer-props="{
         'items-per-page-options': [8]
@@ -83,7 +83,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-container>
+  </v-app>
 </template>
 
 <script>

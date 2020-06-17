@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app>
     <canvas
       ref="board"
       width="640"
@@ -26,7 +26,7 @@
         </div>
       </v-col>
     </v-row>
-  </div>
+  </v-app>
 </template>
 
 <script>

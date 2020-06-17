@@ -1,7 +1,9 @@
 <template>
-  <v-container>
-    <router-view></router-view>
-  </v-container>
+  <v-app>
+    <v-container style="height: 100vh; max-height: 100%;">
+      <router-view></router-view>
+    </v-container>
+  </v-app>
 </template>
 
 <script>

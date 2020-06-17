@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-row v-for="(item, index) in getGames" :key="index">
       <v-col cols="12" md="6" sm="6" lg="6" v-if="item.name == name">
         <h1
@@ -66,7 +66,7 @@
         </div>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
