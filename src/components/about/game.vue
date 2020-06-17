@@ -6,23 +6,12 @@
       height="480"
       style="border: 1px solid black;"
     ></canvas>
-    <br />
-    <v-row>
-      <v-col cols="10">
-        <v-btn v-on:click="move('right')" color="Secondary" text>Right</v-btn>
-        <v-btn v-on:click="move('left')" color="Secondary" text>left</v-btn>
-        <v-btn v-on:click="move('up')" color="Secondary" text>up</v-btn>
-        <v-btn v-on:click="move('down')" color="Secondary" text>down</v-btn>
-      </v-col>
-      <v-col cols="1">
-        <v-btn @click="reset()" color="Secondary" text>Reset</v-btn>
-      </v-col>
-    </v-row>
+    <v-btn @click="reset()" color="Secondary" text>Reset</v-btn>
     <v-row>
       <v-col cols="12">
         <div style="border: 1px dashed black;" class="pa-5">
           <p>Dialog</p>
-          <p>{{ dialog }}</p>
+          <p v-for="(item, index) in dialog" :key="index">{{ item }}</p>
         </div>
       </v-col>
     </v-row>
@@ -30,34 +19,52 @@
 </template>
 
 <script>
+import { building } from "@/api/aboutGame/building.js";
 // import io from "socket.io-client";
 export default {
   name: "about",
   components: {},
   data() {
     return {
-      dialog:
-        "????????????????????????????????????????????????????????????????????????",
+      keywords: "",
+      dialog: [
+        "????????????????????????????????????????????????????????????????????????"
+      ],
       socket: {},
       context: {},
       position: {
-        x: 200,
-        y: 200,
+        x: 450,
+        y: 100,
         w: 20,
         h: 20,
-        originX: 200,
-        originY: 200
+        originX: 450,
+        originY: 100
       },
-      builds: [
-        { x: 0, y: 0, w: 50, h: 50, infos: "北科遊戲設計社" },
-        { x: 100, y: 100, w: 50, h: 50, infos: "成立時間：108-2, 03/15" }
-      ]
+      builds: []
     };
   },
   created() {
     // this.socket = io("http://localhost:3000");
+    window.addEventListener("keydown", this.clickEvent);
   },
   methods: {
+    clickEvent(e) {
+      // console.log(1);
+      switch (e.key) {
+        case "w":
+          this.move("up");
+          break;
+        case "s":
+          this.move("down");
+          break;
+        case "a":
+          this.move("left");
+          break;
+        case "d":
+          this.move("right");
+          break;
+      }
+    },
     move(direction) {
       let movement = 20;
       switch (direction) {
@@ -81,6 +88,7 @@ export default {
       this.position.x = this.position.originX;
       this.position.y = this.position.originY;
       this.doDraw();
+      this.collidingDetect();
     },
     collidingDetect() {
       let trigger = false;
@@ -91,11 +99,11 @@ export default {
         }
       });
       if (trigger == false)
-        this.dialog =
-          "????????????????????????????????????????????????????????????????????????";
+        this.dialog = [
+          "????????????????????????????????????????????????????????????????????????"
+        ];
     },
     doDraw() {
-      this.context = this.$refs.board.getContext("2d");
       this.context.clearRect(
         0,
         0,
@@ -110,7 +118,7 @@ export default {
         this.$refs.board.width
       );
       this.builds.forEach(element => {
-        this.context.fillStyle = "#3949ab";
+        this.context.fillStyle = element.color;
         this.context.fillRect(element.x, element.y, element.w, element.h);
       });
       this.context.fillStyle = "#ffb300";
@@ -133,6 +141,8 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/about");
     document.title = "About | NGC";
+    this.builds = building;
+    this.context = this.$refs.board.getContext("2d");
     this.doDraw();
   },
   computed: {}
