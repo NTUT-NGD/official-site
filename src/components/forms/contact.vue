@@ -43,7 +43,7 @@
         <v-col>
           <v-btn
             color="btnColor"
-            class="mr-4 white--text"
+            class="mr-4 primary--text"
             @click="send"
             elevation="0"
           >

@@ -1,15 +1,23 @@
 <template>
   <v-app>
     <v-container>
-      <v-row justify="start">
-        <v-col cols>
-          <v-card-title>
-            NTUT Adventure
-          </v-card-title>
-        </v-col>
+      <v-row justify="center">
+        <v-card-title>
+          <v-btn
+            icon
+            x-large
+            color="rgb(255, 0, 0, 0.0)"
+            @click="$vuetify.goTo('#game')"
+          >
+            <span class="secondary--text">NTUT Adventure</span>
+            <v-icon color="red">
+              mdi-chevron-down
+            </v-icon></v-btn
+          >
+        </v-card-title>
       </v-row>
       <v-row justify="center">
-        <game class="hidden-xs-only" />
+        <game class="hidden-xs-only" id="game" />
         <v-col cols="12" class="hidden-sm-and-up">
           <div style="border: 1px dashed black;" class="pa-5">
             <p>Dialog</p>

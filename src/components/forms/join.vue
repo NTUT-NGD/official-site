@@ -92,7 +92,7 @@
           <v-row>
             <v-col>
               <v-btn color="btnColor" class="mr-4" @click="send" elevation="0">
-                <span class="white--text">
+                <span class="primary--text">
                   報名
                 </span>
               </v-btn>

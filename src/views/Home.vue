@@ -1,41 +1,41 @@
 <template>
   <v-app class="home">
     <v-container>
-      <h1 class="about-title text-left">No Game, No Life</h1>
-      <h1 class="about-title-mirror text-left">No Game, No Life</h1>
-      <v-carousel
-        v-if="getGames"
-        class="quinary"
-        :delimiter-icon="icons[0].icon"
-        hide-delimiter-background
-        cycle
-        show-arrows-on-hover
-        continuous
-        height="100%"
-      >
-        <v-carousel-item
-          v-for="(item, i) in getGames"
-          :key="i"
-          :to="'/games/' + item.name.toLowerCase()"
+      <v-row>
+        <h1 class="about-title text-left">
+          No Game, No Life <br />
+          <h1 class="about-title-mirror text-left">No Game, No Life</h1>
+        </h1>
+
+        <v-carousel
+          v-if="getGames"
+          class="quinary"
+          :delimiter-icon="icons[0].icon"
+          hide-delimiter-background
+          cycle
+          show-arrows-on-hover
+          continuous
+          height="100%"
         >
-          <v-row justify="center">
-            <v-col cols="12" lg="8">
-              <v-img
-                :src="item.imgURL"
-                max-width="1000"
-                min-height="300"
-                max-height="500"
-              >
-              </v-img>
-            </v-col>
-          </v-row>
-        </v-carousel-item>
-      </v-carousel>
-      <v-skeleton-loader
-        class="mx-auto"
-        type="image"
-        v-if="!getGames"
-      ></v-skeleton-loader>
+          <v-carousel-item
+            v-for="(item, i) in getGames"
+            :key="i"
+            :to="'/games/' + item.name.toLowerCase()"
+          >
+            <v-row justify="center">
+              <v-col cols="12" lg="8">
+                <v-img
+                  :src="item.imgURL"
+                  max-width="1000"
+                  min-height="300"
+                  max-height="500"
+                >
+                </v-img>
+              </v-col>
+            </v-row>
+          </v-carousel-item>
+        </v-carousel>
+      </v-row>
     </v-container>
     <v-row justify="center">
       <v-btn
@@ -47,7 +47,7 @@
         <v-icon color="secondary">
           mdi-chevron-down
         </v-icon>
-        <span class="secondary--text">Try our game on " About "</span>
+        <span class="secondary--text">Try our adventure game on " About "</span>
         <v-icon color="secondary">
           mdi-chevron-down
         </v-icon>
@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import { building } from "@/api/aboutGame/building.js";
 export default {
   name: "home",
   components: {},
@@ -100,17 +101,14 @@ export default {
         "mdi-gamepad"
       ],
       position: {
-        x: 200,
+        x: 50,
         y: 200,
         w: 20,
         h: 20,
         originX: 200,
         originY: 200
       },
-      builds: [
-        { x: 0, y: 0, w: 50, h: 50, infos: "北科遊戲設計社" },
-        { x: 100, y: 100, w: 50, h: 50, infos: "成立時間：108-2, 03/15" }
-      ]
+      builds: []
     };
   },
   methods: {
@@ -130,7 +128,7 @@ export default {
         this.$refs.board.width
       );
       this.builds.forEach(element => {
-        this.context.fillStyle = "#3949ab";
+        this.context.fillStyle = element.color;
         this.context.fillRect(element.x, element.y, element.w, element.h);
       });
       this.context.fillStyle = "#ffb300";
@@ -145,6 +143,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/");
     document.title = "Home | NGC";
+    this.builds = building;
     this.doDraw();
   },
   computed: {

@@ -9,13 +9,15 @@
         v-for="(item, index) in getGames"
         :key="index"
       >
-        <v-img
-          v-if="item.imgURL"
-          :src="item.imgURL"
-          aspect-ratio="1.7"
-          class="pa-0 ma-0"
-          style="z-index:1"
-        ></v-img>
+        <router-link :to="'/games/' + item.name">
+          <v-img
+            v-if="item.imgURL"
+            :src="item.imgURL"
+            aspect-ratio="1.7"
+            class="pa-0 ma-0"
+            style="z-index:1"
+          ></v-img>
+        </router-link>
         <v-skeleton-loader
           class="mx-auto"
           type="image"
