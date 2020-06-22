@@ -20,7 +20,8 @@
           <v-carousel-item
             v-for="(item, i) in getGames"
             :key="i"
-            :to="'/games/' + item.name.toLowerCase()"
+            v-on:click.native="handleClick(item)"
+            :to="'/games/game'"
           >
             <v-row justify="center">
               <v-col cols="12" lg="8">
@@ -112,6 +113,9 @@ export default {
     };
   },
   methods: {
+    handleClick(val) {
+      this.$store.dispatch("dispatchSelectGame", val);
+    },
     doDraw() {
       this.context = this.$refs.board.getContext("2d");
       this.context.clearRect(
