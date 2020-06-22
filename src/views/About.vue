@@ -9,7 +9,9 @@
             color="rgb(255, 0, 0, 0.0)"
             @click="$vuetify.goTo('#game')"
           >
-            <span class="secondary--text">NTUT Adventure</span>
+            <span class="secondary--text"
+              >NTUT Adventure | Press W/A/S/D to move</span
+            >
             <v-icon color="red">
               mdi-chevron-down
             </v-icon></v-btn
@@ -22,16 +24,16 @@
           <div style="border: 1px dashed black;" class="pa-5">
             <p>Dialog</p>
             <p>
-              There is a secret on larger screen.......
+              臺北科技大學 ｜ 遊戲設計社
             </p>
             <p>
-              About who we are.......
+              成立於：2020/03/15
             </p>
             <p>
-              Take the adventure.......
+              我們致力於遊戲的設計與開發, 跨系合作
             </p>
             <p>
-              And find out the truth.......
+              平常會舉辦遊戲的交流會、Game Jam
             </p>
           </div>
         </v-col>

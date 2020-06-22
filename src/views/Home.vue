@@ -68,16 +68,16 @@
           <div style="border: 1px dashed black;" class="pa-5 hidden-sm-and-up">
             <p>Dialog</p>
             <p>
-              There is a secret on larger screen.......
+              臺北科技大學 ｜ 遊戲設計社
             </p>
             <p>
-              About who we are.......
+              成立於：2020/03/15
             </p>
             <p>
-              Take the adventure.......
+              我們致力於遊戲的設計與開發, 跨系合作
             </p>
             <p>
-              And find out the truth.......
+              平常會舉辦遊戲的交流會、Game Jam
             </p>
           </div>
         </v-col>

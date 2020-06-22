@@ -20,6 +20,7 @@ export function register() {
           .doc(user.uid)
           .set({
             UID: user.uid,
+            isMember: false,
             name: user.displayName,
             email: user.email,
             parties: [],

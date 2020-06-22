@@ -33,7 +33,12 @@ export default new Vuex.Store({
     setUser(state, payload) {
       state.user = payload;
       if (payload == null) return;
-      let adminList = ["t107590017@ntut.org.tw", "ntut.game.design@gmail.com"];
+      let adminList = [
+        "t107590017@ntut.org.tw",
+        "t107590009@ntut.org.tw",
+        "t107590011@ntut.org.tw",
+        "ntut.game.design@gmail.com"
+      ];
       if (adminList.includes(payload.email)) state.isAdmin = true;
     },
     setLogin(state, payload) {

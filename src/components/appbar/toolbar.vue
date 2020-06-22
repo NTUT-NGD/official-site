@@ -1,12 +1,25 @@
 <template>
   <div class="sidebar">
     <div class="sidebar-r">
-      <v-btn icon color="rgb(0, 0, 0, 0)" @click="sigin()">
+      <v-btn
+        icon
+        color="rgb(0, 0, 0, 0)"
+        @click="sigin()"
+        style="position:relative;left:30px"
+      >
         <v-icon class="side-icon" color="quaternary">mdi-google-chrome</v-icon>
         <span class="contact-text quaternary--text" v-if="getUser">{{
           getUser.displayName
         }}</span>
         <span class="contact-text quaternary--text" v-else>Login</span>
+      </v-btn>
+      <v-btn
+        color="rgb(0, 0, 0, 0)"
+        icon
+        style="position:relative;top:120px;transform: rotate(270deg);"
+        href="https://www.facebook.com/groups/2620701194872277/"
+      >
+        <v-icon size="24px" color="quaternary">mdi-facebook</v-icon>
       </v-btn>
       <v-dialog v-model="dialog" max-width="290">
         <v-card>

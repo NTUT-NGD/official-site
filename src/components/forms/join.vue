@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card class="mx-auto pa-5" max-width="650" elevation="0">
+    <v-card class="mx-auto pa-5" max-width="650" outlined>
       <v-form ref="form" id="form">
         <v-card max-width="600" elevation="0">
           <v-card-title class="headline">北科遊戲設計社｜報名</v-card-title>

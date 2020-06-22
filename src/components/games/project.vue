@@ -109,7 +109,6 @@ export default {
   methods: {
     doReroute() {
       if (this.getGames == null) {
-        console.log(1);
         this.$router.push("/games");
       }
     }
