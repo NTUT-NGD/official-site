@@ -1,62 +1,64 @@
 <template>
-  <v-form ref="form" id="form">
-    <v-card class="mx-auto pa-5" max-width="600" elevation="0">
-      <v-card elevation="0" outlined>
-        <v-card-title class="headline">聯絡我們</v-card-title>
-        <v-card-subtitle
-          >有什麼想詢問我們的問題呢、或是只是想跟我們聊天，都可以透過下方的表單聯絡我們</v-card-subtitle
-        >
-      </v-card>
-      <v-card
-        class="mx-auto pa-5"
-        outlined
-        elevation="0"
-        style="position:relative;margin-top:20px"
-        v-for="(item, index) in formData"
-        :key="index"
-      >
-        <v-text-field
-          class="primary--text"
-          color="white"
-          :rules="item.rule"
-          :label="item.perform"
-          :value="item.value"
-          :name="item.entry"
-          required
-        ></v-text-field>
-      </v-card>
-      <v-card
-        class="mx-auto pa-5"
-        outlined
-        elevation="0"
-        style="position:relative;margin-top:20px"
-      >
-        <v-textarea
-          :rules="message.rule"
-          :label="message.perform"
-          :value="message.value"
-          :name="message.entry"
-        >
-        </v-textarea>
-      </v-card>
-      <v-row style="position:relative;margin-top:20px">
-        <v-col>
-          <v-btn
-            color="btnColor"
-            class="mr-4 primary--text"
-            @click="send"
-            elevation="0"
+  <v-app>
+    <v-form ref="form" id="form">
+      <v-card class="mx-auto pa-5" max-width="600" elevation="0">
+        <v-card elevation="0" outlined>
+          <v-card-title class="headline">聯絡我們</v-card-title>
+          <v-card-subtitle
+            >有什麼想詢問我們的問題呢、或是只是想跟我們聊天，都可以透過下方的表單聯絡我們</v-card-subtitle
           >
-            提交
-          </v-btn>
-        </v-col>
-        <v-col cols="6"></v-col>
-        <v-col cols="2">
-          <p class="red--text">{{ submitState }}</p>
-        </v-col>
-      </v-row>
-    </v-card>
-  </v-form>
+        </v-card>
+        <v-card
+          class="mx-auto pa-5"
+          outlined
+          elevation="0"
+          style="position:relative;margin-top:20px"
+          v-for="(item, index) in formData"
+          :key="index"
+        >
+          <v-text-field
+            class="primary--text"
+            color="white"
+            :rules="item.rule"
+            :label="item.perform"
+            :value="item.value"
+            :name="item.entry"
+            required
+          ></v-text-field>
+        </v-card>
+        <v-card
+          class="mx-auto pa-5"
+          outlined
+          elevation="0"
+          style="position:relative;margin-top:20px"
+        >
+          <v-textarea
+            :rules="message.rule"
+            :label="message.perform"
+            :value="message.value"
+            :name="message.entry"
+          >
+          </v-textarea>
+        </v-card>
+        <v-row style="position:relative;margin-top:20px">
+          <v-col>
+            <v-btn
+              color="btnColor"
+              class="mr-4 primary--text"
+              @click="send"
+              elevation="0"
+            >
+              提交
+            </v-btn>
+          </v-col>
+          <v-col cols="6"></v-col>
+          <v-col cols="2">
+            <p class="red--text">{{ submitState }}</p>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-form>
+  </v-app>
 </template>
 
 <script>

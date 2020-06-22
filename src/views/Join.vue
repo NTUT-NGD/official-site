@@ -1,7 +1,9 @@
 <template>
-  <v-container class="join" id="Join">
-    <joinForm />
-  </v-container>
+  <v-app>
+    <v-container class="join" id="Join">
+      <joinForm />
+    </v-container>
+  </v-app>
 </template>
 
 <script>
