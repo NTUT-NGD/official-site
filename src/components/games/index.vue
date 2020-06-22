@@ -52,10 +52,12 @@ export default {
   methods: {
     handleClick(val) {
       this.$store.dispatch("dispatchSelectGame", val);
+      document.title = val.name + " | NGC";
     }
   },
   mounted() {
     this.$store.commit("setActivedPage", "/games");
+    document.title = "Games | NGC";
     this.$vuetify.goTo("#Game");
   },
   computed: {
