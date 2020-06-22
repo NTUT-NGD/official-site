@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="joinForm">
     <v-card class="mx-auto pa-5" max-width="650" outlined>
       <v-form ref="form" id="form">
         <v-card max-width="600" elevation="0">
@@ -190,3 +190,15 @@ export default {
   }
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+@font-face {
+  font-family: "Zpix";
+  src: url("~@/assets/Zpix.ttf");
+}
+.joinForm {
+  font-family: "Zpix", "Press Start 2P", cursive;
+}
+</style>
