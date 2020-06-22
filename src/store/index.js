@@ -26,6 +26,7 @@ export default new Vuex.Store({
     events: null,
     adventureX: 640,
     adventureY: 480,
+    selectGame: null,
     selectProject: null
   },
   mutations: {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
       });
       state.events = await retrive("Calendar");
     },
+    setSelectGame(state, val) {
+      state.selectGame = val;
+    },
     setSelectProject(state, val) {
       state.selectProject = val;
     }
@@ -67,6 +71,9 @@ export default new Vuex.Store({
     userSignOut({ commit }) {
       signout();
       commit("setUser", null);
+    },
+    dispatchSelectGame({ commit }, payload) {
+      commit("setSelectGame", payload);
     },
     dispatchSelectProject({ commit }, payload) {
       commit("setSelectProject", payload);

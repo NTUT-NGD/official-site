@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="Game">
     <v-row justify="center">
       <v-col
         cols="12"
@@ -9,7 +9,7 @@
         v-for="(item, index) in getGames"
         :key="index"
       >
-        <router-link :to="'/games/' + item.name">
+        <router-link v-on:click.native="handleClick(item)" :to="'/games/game'">
           <v-img
             v-if="item.imgURL"
             :src="item.imgURL"
@@ -17,28 +17,24 @@
             class="pa-0 ma-0"
             style="z-index:1"
           ></v-img>
+
+          <v-skeleton-loader
+            class="mx-auto"
+            type="image"
+            v-if="!item.imgURL"
+          ></v-skeleton-loader>
+          <v-card elevation="0">
+            <v-btn text class="pa-0" color="rgb(0, 0, 0, 0)">
+              <h2 class="secondary--text">{{ item.name }}</h2>
+            </v-btn>
+            <v-card-text>
+              License: {{ item.license }}
+              <br />
+              Recently update:
+              {{ item.recentlyUpdate }}
+            </v-card-text>
+          </v-card>
         </router-link>
-        <v-skeleton-loader
-          class="mx-auto"
-          type="image"
-          v-if="!item.imgURL"
-        ></v-skeleton-loader>
-        <v-card elevation="0">
-          <v-btn
-            text
-            class="pa-0"
-            color="rgb(0, 0, 0, 0)"
-            :to="'/games/' + item.name.toLowerCase()"
-          >
-            <h2 class="secondary--text">{{ item.name }}</h2>
-          </v-btn>
-          <v-card-text>
-            License: {{ item.license }}
-            <br />
-            Recently update:
-            {{ item.recentlyUpdate }}
-          </v-card-text>
-        </v-card>
       </v-col>
     </v-row>
   </v-app>
@@ -53,9 +49,14 @@ export default {
       games: []
     };
   },
-  methods: {},
+  methods: {
+    handleClick(val) {
+      this.$store.dispatch("dispatchSelectGame", val);
+    }
+  },
   mounted() {
     this.$store.commit("setActivedPage", "/games");
+    this.$vuetify.goTo("#Game");
   },
   computed: {
     getGames() {

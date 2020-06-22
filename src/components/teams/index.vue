@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="Team">
     <v-data-table
       :footer-props="{
         'items-per-page-options': [8]
@@ -142,6 +142,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
+    this.$vuetify.goTo("#Team");
   },
   computed: {
     getAuth() {

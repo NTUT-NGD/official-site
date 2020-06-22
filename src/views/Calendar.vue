@@ -1,5 +1,5 @@
 <template>
-  <v-app class="calendar">
+  <v-app class="calendar" id="Calendar">
     <v-container>
       <calendar />
       <post v-if="getAuth && getAdmin" />
@@ -26,6 +26,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/calendar");
     document.title = "Calendar | NGC";
+    this.$vuetify.goTo("#Calendar");
   },
   computed: {
     getAuth() {

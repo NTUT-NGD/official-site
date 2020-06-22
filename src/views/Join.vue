@@ -1,5 +1,5 @@
 <template>
-  <v-container class="join">
+  <v-container class="join" id="Join">
     <joinForm />
   </v-container>
 </template>
@@ -13,6 +13,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/join");
     document.title = "Join | NGC";
+    this.$vuetify.goTo("#Join");
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="About">
     <v-container>
       <v-row justify="center">
         <v-card-title>
@@ -52,6 +52,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/about");
     document.title = "About | NGC";
+    this.$vuetify.goTo("#About");
   },
   computed: {}
 };

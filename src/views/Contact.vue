@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="contact" id="Contact">
     <contactForm />
   </div>
 </template>
@@ -13,6 +13,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/contact");
     document.title = "Contact | NGC";
+    this.$vuetify.goTo("#Contact");
   }
 };
 </script>

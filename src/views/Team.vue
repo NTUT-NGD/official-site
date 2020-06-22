@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="Team">
     <v-container>
       <router-view></router-view>
     </v-container>
@@ -17,6 +17,7 @@ export default {
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
+    this.$vuetify.goTo("#Team");
   },
   computed: {}
 };
