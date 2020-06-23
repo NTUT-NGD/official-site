@@ -37,68 +37,93 @@
         </v-btn>
       </template>
 
-      <v-card>
-        <v-card-title class="primary" primary-title>
-          創建新專案
-          <v-spacer />
-          <v-btn color="rgb(255, 0, 0, 0.0)" icon @click="dialog = false">
-            <v-icon color="secondary">
-              mdi-close
-            </v-icon>
-          </v-btn>
-        </v-card-title>
+      <v-form ref="form" id="form" v-model="valid" lazy-validation>
+        <v-card>
+          <v-card-title class="primary" primary-title>
+            創建新專案
+            <v-spacer />
+            <v-btn color="rgb(255, 0, 0, 0.0)" icon @click="dialog = false">
+              <v-icon color="secondary">
+                mdi-close
+              </v-icon>
+            </v-btn>
+          </v-card-title>
 
-        <v-card-text>
-          <v-text-field label="專案名稱" v-model="name" required>
-          </v-text-field>
-          <v-textarea label="專案介紹" v-model="intro" required></v-textarea>
-          <v-text-field
-            label="平台(Ex: PS4,Switch)"
-            v-model="platform"
-            required
-          ></v-text-field>
-          <v-text-field label="標籤(Ex: 2D,Unity)" v-model="tags" required>
-          </v-text-field>
-          <v-text-field
-            label="Google Drive 連結"
-            v-model="googleDriveUrl"
-            required
-          >
-          </v-text-field>
-          <v-text-field
-            label="通訊平台連結(Line, DC.....)"
-            v-model="contactUrl"
-            required
-          >
-          </v-text-field>
-        </v-card-text>
+          <v-card-text>
+            <v-text-field
+              label="專案名稱"
+              v-model="formData.name"
+              :rules="rules"
+              required
+            >
+            </v-text-field>
+            <v-textarea
+              label="專案介紹"
+              v-model="formData.intro"
+              :rules="rules"
+              required
+            ></v-textarea>
+            <v-text-field
+              label="平台(Ex: PS4,Switch)"
+              v-model="formData.platform"
+              :rules="rules"
+              required
+            ></v-text-field>
+            <v-text-field
+              label="標籤(Ex: 2D,Unity)"
+              v-model="formData.tags"
+              :rules="rules"
+              required
+            >
+            </v-text-field>
+            <v-text-field
+              label="Google Drive 連結"
+              v-model="formData.googleDriveUrl"
+              :rules="rules"
+              required
+            >
+            </v-text-field>
+            <v-text-field
+              label="通訊平台連結(Line, DC.....)"
+              v-model="formData.contactUrl"
+              :rules="rules"
+              required
+            >
+            </v-text-field>
+          </v-card-text>
 
-        <v-divider></v-divider>
+          <v-divider></v-divider>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="secondary" text @click="createProject">
-            確定
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="secondary" text @click="createProject">
+              確定
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-form>
     </v-dialog>
   </v-app>
 </template>
 
 <script>
+import { doCreate } from "@/api/teams/teamAPI.js";
 export default {
   name: "teams",
   components: {},
   data() {
     return {
+      valid: true,
       dialog: false,
-      name: "",
-      intro: "",
-      platform: "",
-      tags: "",
-      googleDriveUrl: "",
-      contactUrl: "",
+      formData: {
+        name: "",
+        intro: "",
+        platform: "",
+        tags: "",
+        googleDriveUrl: "",
+        contactUrl: "",
+        members: []
+      },
       page: 1,
       headers: [
         {
@@ -125,12 +150,24 @@ export default {
           googleDriveUrl: "https://drive.google.com/drive/my-drive",
           contactUrl: "https://discord.com/"
         }
-      ]
+      ],
+      rules: [v => !!v || "Required"]
     };
   },
   methods: {
     createProject() {
-      console.log("create project");
+      let vm = this;
+      if (this.$refs.form.validate()) {
+        vm.formData.members.push({
+          uid: vm.getAuth.uid,
+          email: vm.getAuth.email,
+          name: vm.getAuth.displayName,
+          job: "leader"
+        });
+        doCreate(vm.formData);
+      } else {
+        console.log(111);
+      }
     },
     handClick(value) {
       this.$store.dispatch("dispatchSelectProject", value);
