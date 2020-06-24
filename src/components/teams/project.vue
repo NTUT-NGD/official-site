@@ -189,10 +189,16 @@ export default {
         vm.items[n].children.push({ id: vm.id, name: element });
         vm.id++;
       });
+    },
+    doReroute() {
+      if (this.getProject == null) {
+        this.$router.push("/teams");
+      }
     }
   },
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
+    this.doReroute();
     document.title = "Team | NGC";
     this.$vuetify.goTo("#Team");
     this.handleData();

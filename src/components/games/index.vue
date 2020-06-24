@@ -5,7 +5,7 @@
         cols="12"
         sm="8"
         md="8"
-        lg="6"
+        lg="4"
         v-for="(item, index) in getGames"
         :key="index"
       >

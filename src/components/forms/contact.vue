@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="contactForm">
     <v-form ref="form" id="form">
       <v-card class="mx-auto pa-5" max-width="600" elevation="0">
         <v-card elevation="0" outlined>
@@ -121,3 +121,15 @@ export default {
   }
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+@font-face {
+  font-family: "Zpix";
+  src: url("~@/assets/Zpix.ttf");
+}
+.contactForm {
+  font-family: "Zpix", "Press Start 2P", cursive;
+}
+</style>
