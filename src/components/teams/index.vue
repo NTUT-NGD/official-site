@@ -107,7 +107,10 @@
 </template>
 
 <script>
-import { doCreate } from "@/api/teams/teamAPI.js";
+//import { doCreate } from "@/api/teams/teamAPI.js";
+
+import { setProject } from "@/api/project/project.js";
+
 export default {
   name: "teams",
   components: {},
@@ -157,14 +160,16 @@ export default {
   methods: {
     createProject() {
       let vm = this;
+
       if (this.$refs.form.validate()) {
         vm.formData.members.push({
           uid: vm.getAuth.uid,
-          email: vm.getAuth.email,
-          name: vm.getAuth.displayName,
+          //email: vm.getAuth.email,
+          ///name: vm.getAuth.displayName,
           job: "leader"
         });
-        doCreate(vm.formData);
+        this.pj.new(vm.getAuth.uid, vm.formData);
+        //doCreate(vm.formData);
       } else {
         console.log(111);
       }
@@ -175,6 +180,9 @@ export default {
         name: "project"
       });
     }
+  },
+  created() {
+    this.pj = setProject();
   },
   mounted() {
     this.$store.commit("setActivedPage", "/teams");

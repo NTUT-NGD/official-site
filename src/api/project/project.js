@@ -1,6 +1,6 @@
 import firebase from "firebase";
 let projectObject = null;
-export async function setProject() {
+export function setProject() {
   projectObject = new project();
   projectObject.init();
   return projectObject;
@@ -12,7 +12,7 @@ export function getProject() {
 let project = function() {
   this.new = async function(Manager, datas) {
     if (this.collection == null) console.log("please init project");
-    else if (datas.Name == null || datas.Intro == null)
+    else if (datas.name == null || datas.intro == null)
       console.log("at least filled the name and intro");
     else if (!(await this.isExists("Users", Manager)))
       console.log("CAN'T find user");
@@ -20,7 +20,7 @@ let project = function() {
       let projectCol = this.collection;
 
       await projectCol
-        .where("Name", "==", datas.Name)
+        .where("name", "==", datas.name)
         .get()
         .then(function(docRef) {
           if (docRef.size <= 0) {
@@ -171,6 +171,10 @@ let project = function() {
         }
       });
     return data;
+  };
+  this.get = async function() {
+    const data = await this.collection.where("inFinished", "==", "否").get();
+    return data.docs.map(doc => doc.data());
   };
   this.remove = async function(Manager, PID) {
     if (!(await this.getPermission(Manager)))
