@@ -9,7 +9,7 @@ import { signout } from "@/api/auth/signout.js";
 import { register } from "@/api/auth/register.js";
 import { retrive } from "@/api/retriveData/retrive.js";
 import { retriveImage } from "@/api/retriveData/retriveImage.js";
-
+import { setProject } from "@/api/project/project.js";
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
@@ -27,7 +27,8 @@ export default new Vuex.Store({
     adventureX: 640,
     adventureY: 480,
     selectGame: null,
-    selectProject: null
+    selectProject: null,
+    projects: []
   },
   mutations: {
     setUser(state, payload) {
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     },
     setSelectProject(state, val) {
       state.selectProject = val;
+    },
+    setProjects(state, value) {
+      state.projects = value;
     }
   },
   actions: {
@@ -82,6 +86,11 @@ export default new Vuex.Store({
     },
     dispatchSelectProject({ commit }, payload) {
       commit("setSelectProject", payload);
+    },
+    loadProjects(context) {
+      let pj = setProject();
+      pj.get().then(res => context.commit("setProjects", res));
+      console.log(pj);
     }
   },
   modules: {}
