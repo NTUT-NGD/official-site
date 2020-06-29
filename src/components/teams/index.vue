@@ -8,19 +8,20 @@
       :headers="headers"
       :items="projects"
       @click:row="handClick"
+      loading="true"
     >
       <template slot="items" slot-scope="props">
         <tr>
           <td>{{ props.item.name }}</td>
           <td>{{ props.item.intro }}</td>
-          <td>{{ props.item.recruiting }}</td>
           <td>{{ props.item.platform }}</td>
           <td>{{ props.item.tags }}</td>
+          <td>{{ props.item.recruiting }}</td>
           <td>{{ props.item.inFinished }}</td>
         </tr>
       </template>
     </v-data-table>
-    <v-dialog v-model="dialog" width="500" v-if="getAuth">
+    <v-dialog v-model="dialog" width="500" v-if="getAuth[1][0].isMember">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="btnColor"
@@ -108,6 +109,8 @@
 
 <script>
 import { doCreate } from "@/api/teams/teamAPI.js";
+import { retrive } from "@/api/retriveData/retrive.js";
+
 export default {
   name: "teams",
   components: {},
@@ -139,17 +142,17 @@ export default {
         { text: "完成", value: "inFinished" }
       ],
       projects: [
-        {
-          name: "Frozen Yogurt",
-          intro: "簡單的小遊戲得斯",
-          recruiting: "是",
-          tags: ["2D"],
-          platform: ["PS4", "Switch"],
-          inFinished: "否",
-          parties: [{ name: "PlayerA" }, { name: "PlayerB" }],
-          googleDriveUrl: "https://drive.google.com/drive/my-drive",
-          contactUrl: "https://discord.com/"
-        }
+        // {
+        //   name: "Frozen Yogurt",
+        //   intro: "簡單的小遊戲得斯",
+        //   recruiting: "是",
+        //   tags: ["2D"],
+        //   platform: ["PS4", "Switch"],
+        //   inFinished: "否",
+        //   parties: [{ name: "PlayerA" }, { name: "PlayerB" }],
+        //   googleDriveUrl: "https://drive.google.com/drive/my-drive",
+        //   contactUrl: "https://discord.com/"
+        // }
       ],
       rules: [v => !!v || "Required"]
     };
@@ -157,16 +160,16 @@ export default {
   methods: {
     createProject() {
       let vm = this;
-      if (this.$refs.form.validate()) {
+      if (vm.$refs.form.validate()) {
         vm.formData.members.push({
-          uid: vm.getAuth.uid,
-          email: vm.getAuth.email,
-          name: vm.getAuth.displayName,
+          uid: vm.getAuth[0].uid,
+          email: vm.getAuth[0].email,
+          name: vm.getAuth[0].displayName,
           job: "leader"
         });
         doCreate(vm.formData);
-      } else {
-        console.log(111);
+        vm.dialog = false;
+        this.$refs.form.reset();
       }
     },
     handClick(value) {
@@ -174,12 +177,17 @@ export default {
       this.$router.push({
         name: "project"
       });
+    },
+    async getProjects() {
+      let vm = this;
+      vm.projects = await retrive("Projects");
     }
   },
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
     this.$vuetify.goTo("#Team");
+    this.getProjects();
   },
   computed: {
     getAuth() {

@@ -9,54 +9,56 @@
           </v-card-title>
           <v-card-subtitle>
             <p>專案介紹：{{ getProject.intro }}</p>
-            <p>招募中：{{ getProject.recruiting }}</p>
-            <v-dialog v-model="dialog" width="500" v-if="isRecruiting">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  color="btnColor"
-                  dark
-                  v-bind="attrs"
-                  v-on="on"
-                  text
-                  elevation="0"
-                >
-                  申請加入
-                </v-btn>
-              </template>
-
-              <v-card>
-                <v-card-title class="primary" primary-title>
-                  申請加入這個專案
-                  <v-spacer />
+            <p>
+              招募中：
+              <v-dialog v-model="dialog" width="500" v-if="isRecruiting">
+                <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="rgb(255, 0, 0, 0.0)"
-                    icon
-                    @click="dialog = false"
+                    color="btnColor"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                    text
+                    elevation="0"
                   >
-                    <v-icon color="secondary">
-                      mdi-close
-                    </v-icon>
+                    申請加入
                   </v-btn>
-                </v-card-title>
+                </template>
+                <v-card>
+                  <v-card-title class="primary" primary-title>
+                    申請加入這個專案
+                    <v-spacer />
+                    <v-btn
+                      color="rgb(255, 0, 0, 0.0)"
+                      icon
+                      @click="dialog = false"
+                    >
+                      <v-icon color="secondary">
+                        mdi-close
+                      </v-icon>
+                    </v-btn>
+                  </v-card-title>
 
-                <v-card-text>
-                  <v-textarea
-                    v-model="introduction"
-                    label="請輸入自我介紹（專長、個性、建議或任何您想說的話）"
-                  >
-                  </v-textarea>
-                </v-card-text>
+                  <v-card-text>
+                    <v-textarea
+                      v-model="introduction"
+                      label="請輸入自我介紹（專長、個性、建議或任何您想說的話）"
+                    >
+                    </v-textarea>
+                  </v-card-text>
 
-                <v-divider></v-divider>
+                  <v-divider></v-divider>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="secondary" text @click="apply">
-                    送出
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="secondary" text @click="apply">
+                      送出
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <span v-else>停止招募</span>
+            </p>
           </v-card-subtitle>
           <v-card-actions>
             <v-treeview :items="items"></v-treeview>
@@ -141,8 +143,6 @@ export default {
       items: [],
       dialog: false,
       introduction: "",
-      isMember: true, //判斷有沒有權限，要從js抓
-      isRecruiting: true, //招募中, 同上
       isCreator: true, //創建者, 同上
       applicants: [{ name: "a student" }, { name: "b student" }] //申請者，同上
     };
@@ -160,10 +160,12 @@ export default {
     handleData() {
       let vm = this;
       vm.pushItem("成員");
-      vm.pushChildByName(0, vm.getProject.parties);
+      vm.pushChildByName(0, vm.getProject.members);
       vm.pushItem("平台");
+      vm.getProject.platform = vm.getProject.platform.split(",");
       vm.pushChild(1, vm.getProject.platform);
       vm.pushItem("標籤");
+      vm.getProject.tags = vm.getProject.tags.split(",");
       vm.pushChild(2, vm.getProject.tags);
     },
     pushItem(name) {

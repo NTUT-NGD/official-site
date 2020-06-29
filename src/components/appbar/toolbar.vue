@@ -9,7 +9,7 @@
       >
         <v-icon class="side-icon" color="quaternary">mdi-google-chrome</v-icon>
         <span class="contact-text quaternary--text" v-if="getUser">{{
-          getUser.displayName
+          getUser[0].displayName
         }}</span>
         <span class="contact-text quaternary--text" v-else>Login</span>
       </v-btn>

@@ -4,7 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
-import { signin } from "@/api/auth/signin.js";
+import { signin, getAuthState } from "@/api/auth/signin.js";
 import { signout } from "@/api/auth/signout.js";
 import { register } from "@/api/auth/register.js";
 import { retrive } from "@/api/retriveData/retrive.js";
@@ -30,8 +30,11 @@ export default new Vuex.Store({
     selectProject: null
   },
   mutations: {
-    setUser(state, payload) {
-      state.user = payload;
+    async setUser(state, payload) {
+      let auth = [];
+      auth.push(payload);
+      auth.push(await getAuthState(payload));
+      state.user = auth;
       if (payload == null) return;
       let adminList = [
         "t107590017@ntut.org.tw",
