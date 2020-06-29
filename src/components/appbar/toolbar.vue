@@ -93,7 +93,7 @@ export default {
   left: 10px;
   writing-mode: vertical-lr;
   text-orientation: mi;
-  transform: rotate(180deg);
+  transform: rotate(0deg);
   letter-spacing: 3px;
 }
 .contact-text-r {

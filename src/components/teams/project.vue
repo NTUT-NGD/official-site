@@ -1,7 +1,6 @@
 <template>
-  <v-app v-if="getProject" id="Team">
-    <v-row>
-      <v-col cols="0" sm="3" md="3" lg="3" xl="3"></v-col>
+  <v-app v-if="getProject" id="Team" class="pa-0">
+    <v-row justify="center">
       <v-col cols="11" sm="6" md="6" lg="6" xl="6">
         <v-card elevation="0">
           <v-card-title>
@@ -9,9 +8,13 @@
           </v-card-title>
           <v-card-subtitle>
             <p>專案介紹：{{ getProject.intro }}</p>
-            <p>
+            <p v-if="getLeader === false && getMember === false">
               招募中：
-              <v-dialog v-model="dialog" width="500" v-if="isRecruiting">
+              <v-dialog
+                v-model="dialog"
+                width="500"
+                v-if="getProject.recruiting === '是'"
+              >
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     color="btnColor"
@@ -20,9 +23,11 @@
                     v-on="on"
                     text
                     elevation="0"
+                    v-if="getAuth"
                   >
                     申請加入
                   </v-btn>
+                  <span v-else>請先登入</span>
                 </template>
                 <v-card>
                   <v-card-title class="primary" primary-title>
@@ -66,74 +71,77 @@
         </v-card>
       </v-col>
     </v-row>
-    <div v-if="isMember">
-      <hr />
-      <v-row>
-        <v-col cols="0" sm="3" md="3" lg="3" xl="3"></v-col>
-        <v-col cols="11" sm="6" md="6" lg="6" xl="6">
-          <v-card elevation="0">
-            <v-card-title>
-              <p>成員專區</p>
-            </v-card-title>
-            <v-card-text>
-              <p>
-                Google Drive:<v-btn
-                  text
-                  color="rgb(255, 0, 0, 0.0)"
-                  :href="getProject.googleDriveUrl"
-                >
-                  <span class="secondary--text">
-                    素材連結
-                  </span></v-btn
-                >
-              </p>
-              <p>
-                Contact Url:
-                <v-btn
-                  text
-                  color="rgb(255, 0, 0, 0.0)"
-                  :href="getProject.contactUrl"
-                >
-                  <span class="secondary--text">
-                    討論平台
-                  </span></v-btn
-                >
-              </p>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
-    <div>
-      <div v-if="isMember">
-        <hr />
-        <v-row>
-          <v-col cols="0" sm="3" md="3" lg="3" xl="3"></v-col>
-          <v-col cols="11" sm="6" md="6" lg="6" xl="6">
-            <v-card elevation="0">
-              <v-card-title>
-                <p>申請名單</p>
-              </v-card-title>
-              <v-card-actions v-for="(item, index) in applicants" :key="index">
+    <v-row v-if="getAuth && getMember" justify="center">
+      <v-col cols="11" sm="6" md="6" lg="6" xl="6">
+        <v-card elevation="0">
+          <v-card-title>
+            <p>成員專區</p>
+          </v-card-title>
+          <v-card-text>
+            <p>
+              Google Drive:<v-btn
+                text
+                color="rgb(255, 0, 0, 0.0)"
+                :href="getProject.googleDriveUrl"
+              >
+                <span class="secondary--text">
+                  素材連結
+                </span></v-btn
+              >
+            </p>
+            <p>
+              Contact Url:
+              <v-btn
+                text
+                color="rgb(255, 0, 0, 0.0)"
+                :href="getProject.contactUrl"
+              >
+                <span class="secondary--text">
+                  討論平台
+                </span></v-btn
+              >
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-if="getAuth && getLeader" justify="center">
+      <v-col cols="11" sm="6" md="6" lg="6" xl="6">
+        <v-card elevation="0">
+          <v-card-title>
+            <p>申請名單</p>
+          </v-card-title>
+          <div v-if="applicants.length > 0">
+            <div v-for="(item, index) in applicants" :key="index">
+              <v-card-actions>
                 <v-card-text>
-                  <p>{{ item.name }}</p>
-                </v-card-text>
-                <v-card-text>
-                  <v-btn class="pa-0" text @click="agree(item)">同意</v-btn>
-                  <v-btn class="pa-0" text @click="disagree(item)"
-                    >不同意</v-btn
-                  >
+                  <p>名稱：{{ item.user }}</p>
+                  <p>自我介紹：{{ item.intro }}</p>
                 </v-card-text>
               </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-    </div>
+              <v-card-actions>
+                <v-btn class="pa-0" text @click="agree(item)">同意</v-btn>
+                <v-btn class="pa-0" text @click="disagree(item)">不同意</v-btn>
+              </v-card-actions>
+            </div>
+          </div>
+          <div v-else>
+            <v-card-text>沒有申請</v-card-text>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-app>
 </template>
 
 <script>
+import {
+  getMembers,
+  doApply,
+  doAgree,
+  doDisagree
+} from "@/api/teams/teamAPI.js";
+
 export default {
   name: "teams",
   components: {},
@@ -144,18 +152,23 @@ export default {
       dialog: false,
       introduction: "",
       isCreator: true, //創建者, 同上
-      applicants: [{ name: "a student" }, { name: "b student" }] //申請者，同上
+      applicants: [] //申請者，同上
     };
   },
   methods: {
     agree(value) {
-      console.log(value);
+      let user = JSON.parse(JSON.stringify(value));
+      doAgree(this.getProject.id, user);
     },
     disagree(value) {
-      console.log(value);
+      let user = JSON.parse(JSON.stringify(value));
+      doDisagree(this.getProject.id, user);
     },
     apply() {
-      this.dialog = false;
+      let vm = this;
+      vm.dialog = false;
+      doApply(vm.getProject.id, vm.getAuth, vm.introduction);
+      vm.introduction = "";
     },
     handleData() {
       let vm = this;
@@ -196,6 +209,9 @@ export default {
       if (this.getProject == null) {
         this.$router.push("/teams");
       }
+    },
+    async getApplicants() {
+      this.applicants = await getMembers(this.getProject.id);
     }
   },
   mounted() {
@@ -204,10 +220,23 @@ export default {
     document.title = "Team | NGC";
     this.$vuetify.goTo("#Team");
     this.handleData();
+    if (this.getLeader) this.getApplicants();
   },
   computed: {
+    getAuth() {
+      return this.$store.state.user;
+    },
     getProject() {
       return this.$store.state.selectProject;
+    },
+    getLeader() {
+      if (this.getAuth == null) return false;
+      return this.getAuth[0].uid == this.getProject.members[0].uid;
+    },
+    getMember() {
+      if (this.getAuth == null) return false;
+      let parties = this.getAuth[1][0].parties;
+      return JSON.parse(JSON.stringify(parties)).includes(this.getProject.id);
     }
   }
 };

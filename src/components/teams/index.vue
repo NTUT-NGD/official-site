@@ -21,7 +21,11 @@
         </tr>
       </template>
     </v-data-table>
-    <v-dialog v-model="dialog" width="500" v-if="getAuth[1][0].isMember">
+    <v-dialog
+      v-model="dialog"
+      width="500"
+      v-if="getAuth && getAuth[1][0].isMember"
+    >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="btnColor"
@@ -125,7 +129,8 @@ export default {
         tags: "",
         googleDriveUrl: "",
         contactUrl: "",
-        members: []
+        members: [],
+        applicants: []
       },
       page: 1,
       headers: [
