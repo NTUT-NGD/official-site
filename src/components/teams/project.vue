@@ -1,19 +1,21 @@
 <template>
-  <v-app v-if="project" id="Team" class="pa-0">
+  <v-app id="Team" class="pa-0">
     <v-row justify="center">
       <v-col cols="11" sm="6" md="6" lg="6" xl="6">
         <v-card elevation="0">
           <v-card-title>
-            <p>專案名稱：{{ project.name }}</p>
+            <p>專案名稱：{{ getProject.name }}</p>
           </v-card-title>
           <v-card-subtitle>
-            <p>專案介紹：{{ project.intro }}</p>
-            <p v-if="getLeader === false && getMember === false">
-              招募中：
+            <p>專案介紹：{{ getProject.intro }}</p>
+            <p>創建專案：{{ getProject.members[0].name }}</p>
+            <p v-if="checkMember == false">
+              招募狀態：
+              <span v-if="checkApplicant">申請中</span>
               <v-dialog
                 v-model="dialog"
                 width="500"
-                v-if="project.recruiting === '是'"
+                v-else-if="getProject.recruiting === '是'"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -66,53 +68,45 @@
             </p>
           </v-card-subtitle>
           <v-card-actions>
-            <v-treeview :items="items"></v-treeview>
+            <v-treeview :items="getItems"></v-treeview>
           </v-card-actions>
+          <v-card elevation="0">
+            <v-card-title>
+              <p>成員專區</p>
+            </v-card-title>
+            <v-card-text>
+              <p>
+                Google Drive:<v-btn
+                  text
+                  color="rgb(255, 0, 0, 0.0)"
+                  :href="getProject.googleDriveUrl"
+                >
+                  <span class="secondary--text">
+                    素材連結
+                  </span></v-btn
+                >
+              </p>
+              <p>
+                Contact Url:
+                <v-btn
+                  text
+                  color="rgb(255, 0, 0, 0.0)"
+                  :href="getProject.contactUrl"
+                >
+                  <span class="secondary--text">
+                    討論平台
+                  </span></v-btn
+                >
+              </p>
+            </v-card-text>
+          </v-card>
         </v-card>
-      </v-col>
-    </v-row>
-    <v-row v-if="getAuth && getMember" justify="center">
-      <v-col cols="11" sm="6" md="6" lg="6" xl="6">
-        <v-card elevation="0">
-          <v-card-title>
-            <p>成員專區</p>
-          </v-card-title>
-          <v-card-text>
-            <p>
-              Google Drive:<v-btn
-                text
-                color="rgb(255, 0, 0, 0.0)"
-                :href="project.googleDriveUrl"
-              >
-                <span class="secondary--text">
-                  素材連結
-                </span></v-btn
-              >
-            </p>
-            <p>
-              Contact Url:
-              <v-btn
-                text
-                color="rgb(255, 0, 0, 0.0)"
-                :href="project.contactUrl"
-              >
-                <span class="secondary--text">
-                  討論平台
-                </span></v-btn
-              >
-            </p>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row v-if="getAuth && getLeader" justify="center">
-      <v-col cols="11" sm="6" md="6" lg="6" xl="6">
-        <v-card elevation="0">
+        <v-card elevation="0" v-if="checkLeader">
           <v-card-title>
             <p>申請名單</p>
           </v-card-title>
-          <div v-if="applicants.length > 0">
-            <div v-for="(item, index) in applicants" :key="index">
+          <div v-if="getProject.applicants.length > 0">
+            <div v-for="(item, index) in getProject.applicants" :key="index">
               <v-card-actions>
                 <v-card-text>
                   <p>名稱：{{ item.user }}</p>
@@ -135,12 +129,7 @@
 </template>
 
 <script>
-import {
-  getMembers,
-  doApply,
-  doAgree,
-  doDisagree
-} from "@/api/teams/teamAPI.js";
+import { doApply, doAgree, doDisagree } from "@/api/teams/teamAPI.js";
 import { retriveDoc } from "@/api/retriveData/retrive.js";
 
 export default {
@@ -148,14 +137,9 @@ export default {
   components: {},
   data() {
     return {
-      auth: null,
       project: null,
-      id: 1,
-      items: [],
       dialog: false,
-      introduction: "",
-      isCreator: true, //創建者, 同上
-      applicants: [] //申請者，同上
+      introduction: ""
     };
   },
   methods: {
@@ -173,84 +157,86 @@ export default {
       doApply(vm.getProject.id, vm.getAuth, vm.introduction);
       vm.introduction = "";
     },
-    handleData() {
-      let vm = this;
-      vm.pushItem("成員");
-      vm.pushChildByName(0, vm.getProject.members);
-      vm.pushItem("平台");
-      vm.getProject.platform = vm.getProject.platform.split(",");
-      vm.pushChild(1, vm.getProject.platform);
-      vm.pushItem("標籤");
-      vm.getProject.tags = vm.getProject.tags.split(",");
-      vm.pushChild(2, vm.getProject.tags);
-    },
-    pushItem(name) {
-      this.items.push({
-        id: this.id,
-        name: name,
-        children: []
-      });
-      this.id++;
-    },
-    //Array of [{ name:"A" },{ name:"B"}, ......]
-    pushChildByName(n, obj) {
-      let vm = this;
-      obj.forEach(element => {
-        vm.items[n].children.push({ id: vm.id, name: element.name });
-        vm.id++;
-      });
-    },
-    //Array of ["A","B", ......]
-    pushChild(n, obj) {
-      let vm = this;
-      obj.forEach(element => {
-        vm.items[n].children.push({ id: vm.id, name: element });
-        vm.id++;
-      });
-    },
     doReroute() {
       if (this.getProject == null) {
         this.$router.push("/teams");
       }
     },
-    async getApplicants() {
-      this.applicants = await getMembers(this.getProject.id);
-    },
-    updateProject() {
-      retriveDoc("Projects", this.getProject.id);
+    async setProject() {
+      let vm = this;
+      retriveDoc("Projects", vm.$store.state.selectProject.id);
     }
   },
   mounted() {
-    this.$store.commit("setActivedPage", "/teams");
     this.doReroute();
+    this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
     this.$vuetify.goTo("#Team");
-    this.handleData();
-    if (this.getLeader) this.getApplicants();
-    this.project = this.$store.state.selectProject;
-    this.auth = this.$store.state.user;
+    this.setProject();
   },
   computed: {
+    getItems() {
+      let vm = this;
+      let items = [];
+      let id = 0;
+      items.push({ id: id, name: "成員", children: [] });
+      id++;
+      vm.getProject.members.forEach(element => {
+        items[0].children.push({
+          id: id,
+          name: element.name + " - " + element.job.toUpperCase()
+        });
+        id++;
+      });
+      items.push({
+        id: id,
+        name: "標籤",
+        children: [{ id: id + 1, name: vm.getProject.tags }]
+      });
+      id++;
+      items.push({
+        id: id,
+        name: "平台",
+        children: [{ id: id + 1, name: vm.getProject.platform }]
+      });
+      return items;
+    },
     getAuth() {
       return this.$store.state.user;
     },
     getProject() {
       return this.$store.state.selectProject;
     },
-    getLeader() {
-      if (this.auth == null) return false;
-      return this.auth[0].uid == this.project.members[0].uid;
+    checkLeader() {
+      let state = this.getProject;
+      return state.members[0].uid == this.getAuth[0].uid;
     },
-    getMember() {
-      if (this.auth == null) return false;
-      return JSON.parse(JSON.stringify(this.auth[1][0].parties)).includes(
-        this.project.id
-      );
+    checkMember() {
+      let isMember = false;
+      this.getProject.members.forEach(element => {
+        if (element.uid == this.getAuth[0].uid) {
+          isMember = true;
+          return true;
+        }
+      });
+      return isMember;
+    },
+    checkApplicant() {
+      let isApplicant = false;
+      this.getProject.applicants.forEach(element => {
+        if (element.uid == this.getAuth[0].uid) {
+          isApplicant = true;
+          return true;
+        }
+      });
+      return isApplicant;
     }
   },
   wathc: {
-    project() {},
-    auth() {}
+    getProject: {
+      handler: function() {},
+      deep: true
+    }
   }
 };
 </script>
