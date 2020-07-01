@@ -132,7 +132,8 @@ export default {
         members: [],
         applicants: [],
         recruiting: "是",
-        inFinished: "否"
+        inFinished: "否",
+        createDate: new Date()
       },
       page: 1,
       headers: [
@@ -203,7 +204,10 @@ export default {
     }
   },
   watch: {
-    projects() {}
+    projects() {
+      let vm = this;
+      vm.setProjects();
+    }
   }
 };
 </script>
