@@ -247,7 +247,7 @@ export default {
         details: vm.details,
         start: vm.startDate + " " + vm.startTime,
         end: vm.endDate + " " + vm.endTime,
-        poster: vm.getUser.displayName,
+        poster: vm.getUser[0].displayName,
         location: vm.location,
         color: vm.color
       };

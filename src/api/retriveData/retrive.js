@@ -5,6 +5,7 @@ export async function retrive(collection) {
   const snapshot = await firebase
     .firestore()
     .collection(collection)
+    .orderBy("name", "desc")
     .get();
   return snapshot.docs.map(doc => doc.data());
 }

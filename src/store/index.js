@@ -58,7 +58,6 @@ export default new Vuex.Store({
       state.games.forEach(async element => {
         element.imgURL = await retriveImage(element);
       });
-      state.events = await retrive("Calendar");
     },
     setSelectGame(state, val) {
       state.selectGame = val;

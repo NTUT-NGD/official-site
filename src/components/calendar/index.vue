@@ -40,7 +40,7 @@
           ref="calendar"
           v-model="focus"
           color="#ef5350"
-          :events="getEvents || events"
+          :events="events"
           :event-color="getEventColor"
           :now="today"
           :type="type"
@@ -119,6 +119,7 @@
 </template>
 
 <script>
+import { retrive } from "@/api/retriveData/retrive.js";
 export default {
   data() {
     return {
@@ -149,9 +150,6 @@ export default {
   },
   components: {},
   computed: {
-    getEvents() {
-      return this.$store.state.events;
-    },
     title() {
       const { start, end } = this;
       if (!start || !end) {
@@ -181,8 +179,18 @@ export default {
   mounted() {
     this.$refs.calendar.checkChange();
     this.$store.commit("setActivedPage", "/Calendar");
+    this.setEvents();
+  },
+  watch: {
+    events() {
+      let vm = this;
+      vm.setEvents();
+    }
   },
   methods: {
+    async setEvents() {
+      this.events = await retrive("Calendar");
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
