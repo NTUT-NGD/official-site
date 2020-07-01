@@ -14,5 +14,6 @@ export async function retriveDoc(collection, id) {
     .collection(collection)
     .doc(id)
     .get();
-  store.commit("setSelectProject", await snapshot.data());
+  console.log(id);
+  store.commit("setSelectProject", snapshot.data());
 }

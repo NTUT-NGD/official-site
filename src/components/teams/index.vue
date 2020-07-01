@@ -165,7 +165,7 @@ export default {
     };
   },
   methods: {
-    createProject() {
+    async createProject() {
       let vm = this;
       if (vm.$refs.form.validate()) {
         vm.formData.members.push({
@@ -177,6 +177,7 @@ export default {
         doCreate(vm.formData);
         vm.dialog = false;
         this.$refs.form.reset();
+        vm.projects = await retrive("Projects");
       }
     },
     handClick(value) {
@@ -185,7 +186,7 @@ export default {
         name: "project"
       });
     },
-    async getProjects() {
+    async setProjects() {
       let vm = this;
       vm.projects = await retrive("Projects");
     }
@@ -194,12 +195,15 @@ export default {
     this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
     this.$vuetify.goTo("#Team");
-    this.getProjects();
+    this.setProjects();
   },
   computed: {
     getAuth() {
       return this.$store.state.user;
     }
+  },
+  watch: {
+    projects() {}
   }
 };
 </script>

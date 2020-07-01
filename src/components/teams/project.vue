@@ -1,19 +1,19 @@
 <template>
-  <v-app v-if="getProject" id="Team" class="pa-0">
+  <v-app v-if="project" id="Team" class="pa-0">
     <v-row justify="center">
       <v-col cols="11" sm="6" md="6" lg="6" xl="6">
         <v-card elevation="0">
           <v-card-title>
-            <p>專案名稱：{{ getProject.name }}</p>
+            <p>專案名稱：{{ project.name }}</p>
           </v-card-title>
           <v-card-subtitle>
-            <p>專案介紹：{{ getProject.intro }}</p>
+            <p>專案介紹：{{ project.intro }}</p>
             <p v-if="getLeader === false && getMember === false">
               招募中：
               <v-dialog
                 v-model="dialog"
                 width="500"
-                v-if="getProject.recruiting === '是'"
+                v-if="project.recruiting === '是'"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -82,7 +82,7 @@
               Google Drive:<v-btn
                 text
                 color="rgb(255, 0, 0, 0.0)"
-                :href="getProject.googleDriveUrl"
+                :href="project.googleDriveUrl"
               >
                 <span class="secondary--text">
                   素材連結
@@ -94,7 +94,7 @@
               <v-btn
                 text
                 color="rgb(255, 0, 0, 0.0)"
-                :href="getProject.contactUrl"
+                :href="project.contactUrl"
               >
                 <span class="secondary--text">
                   討論平台
@@ -148,6 +148,8 @@ export default {
   components: {},
   data() {
     return {
+      auth: null,
+      project: null,
       id: 1,
       items: [],
       dialog: false,
@@ -160,19 +162,16 @@ export default {
     agree(value) {
       let user = JSON.parse(JSON.stringify(value));
       doAgree(this.getProject.id, user);
-      this.updateProject();
     },
     disagree(value) {
       let user = JSON.parse(JSON.stringify(value));
       doDisagree(this.getProject.id, user);
-      this.updateProject();
     },
     apply() {
       let vm = this;
       vm.dialog = false;
       doApply(vm.getProject.id, vm.getAuth, vm.introduction);
       vm.introduction = "";
-      vm.updateProject();
     },
     handleData() {
       let vm = this;
@@ -228,6 +227,8 @@ export default {
     this.$vuetify.goTo("#Team");
     this.handleData();
     if (this.getLeader) this.getApplicants();
+    this.project = this.$store.state.selectProject;
+    this.auth = this.$store.state.user;
   },
   computed: {
     getAuth() {
@@ -237,15 +238,19 @@ export default {
       return this.$store.state.selectProject;
     },
     getLeader() {
-      if (this.getAuth == null) return false;
-      return this.getAuth[0].uid == this.getProject.members[0].uid;
+      if (this.auth == null) return false;
+      return this.auth[0].uid == this.project.members[0].uid;
     },
     getMember() {
-      if (this.getAuth == null) return false;
-      return JSON.parse(JSON.stringify(this.getAuth[1][0].parties)).includes(
-        this.getProject.id
+      if (this.auth == null) return false;
+      return JSON.parse(JSON.stringify(this.auth[1][0].parties)).includes(
+        this.project.id
       );
     }
+  },
+  wathc: {
+    project() {},
+    auth() {}
   }
 };
 </script>
