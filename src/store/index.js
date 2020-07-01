@@ -7,7 +7,7 @@ Vue.use(Vuex);
 import { signin, getAuthState } from "@/api/auth/signin.js";
 import { signout } from "@/api/auth/signout.js";
 import { register } from "@/api/auth/register.js";
-import { retrive } from "@/api/retriveData/retrive.js";
+import { retrive, retriveDoc } from "@/api/retriveData/retrive.js";
 import { retriveImage } from "@/api/retriveData/retriveImage.js";
 
 export default new Vuex.Store({
@@ -85,6 +85,9 @@ export default new Vuex.Store({
     },
     dispatchSelectProject({ commit }, payload) {
       commit("setSelectProject", payload);
+    },
+    dispatchUpdateSelectProject(payload) {
+      retriveDoc("Projects", payload);
     }
   },
   modules: {}

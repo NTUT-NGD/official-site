@@ -130,7 +130,9 @@ export default {
         googleDriveUrl: "",
         contactUrl: "",
         members: [],
-        applicants: []
+        applicants: [],
+        recruiting: "是",
+        inFinished: "否"
       },
       page: 1,
       headers: [

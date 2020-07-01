@@ -141,6 +141,7 @@ import {
   doAgree,
   doDisagree
 } from "@/api/teams/teamAPI.js";
+import { retriveDoc } from "@/api/retriveData/retrive.js";
 
 export default {
   name: "teams",
@@ -159,16 +160,19 @@ export default {
     agree(value) {
       let user = JSON.parse(JSON.stringify(value));
       doAgree(this.getProject.id, user);
+      this.updateProject();
     },
     disagree(value) {
       let user = JSON.parse(JSON.stringify(value));
       doDisagree(this.getProject.id, user);
+      this.updateProject();
     },
     apply() {
       let vm = this;
       vm.dialog = false;
       doApply(vm.getProject.id, vm.getAuth, vm.introduction);
       vm.introduction = "";
+      vm.updateProject();
     },
     handleData() {
       let vm = this;
@@ -212,6 +216,9 @@ export default {
     },
     async getApplicants() {
       this.applicants = await getMembers(this.getProject.id);
+    },
+    updateProject() {
+      retriveDoc("Projects", this.getProject.id);
     }
   },
   mounted() {
@@ -235,8 +242,9 @@ export default {
     },
     getMember() {
       if (this.getAuth == null) return false;
-      let parties = this.getAuth[1][0].parties;
-      return JSON.parse(JSON.stringify(parties)).includes(this.getProject.id);
+      return JSON.parse(JSON.stringify(this.getAuth[1][0].parties)).includes(
+        this.getProject.id
+      );
     }
   }
 };

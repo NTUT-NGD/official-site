@@ -16,7 +16,7 @@
       <v-btn
         color="rgb(0, 0, 0, 0)"
         icon
-        style="position:relative;top:120px;transform: rotate(270deg);"
+        style="position:relative;top:120px;transform: rotate(0deg);"
         href="https://www.facebook.com/groups/2620701194872277/"
       >
         <v-icon size="24px" color="quaternary">mdi-facebook</v-icon>

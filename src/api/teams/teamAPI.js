@@ -70,7 +70,6 @@ export function doAgree(id, user) {
     })
   });
   addNewParty(user.uid, id);
-  location.reload();
 }
 
 export function doDisagree(id, user) {
@@ -86,5 +85,4 @@ export function doDisagree(id, user) {
       intro: user.intro
     })
   });
-  location.reload();
 }
