@@ -9,12 +9,13 @@
           <v-card-subtitle>
             <p>專案介紹：{{ getProject.intro }}</p>
             <p>創建專案：{{ getProject.members[0].name }}</p>
-            <p>
+            <p v-if="checkMember == false">
               招募狀態：
+              <span v-if="checkApplicant">申請中</span>
               <v-dialog
                 v-model="dialog"
                 width="500"
-                v-if="getProject.recruiting === '是'"
+                v-else-if="getProject.recruiting === '是'"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -100,7 +101,7 @@
             </v-card-text>
           </v-card>
         </v-card>
-        <v-card elevation="0">
+        <v-card elevation="0" v-if="checkLeader">
           <v-card-title>
             <p>申請名單</p>
           </v-card-title>
@@ -167,7 +168,7 @@ export default {
     }
   },
   mounted() {
-    // this.doReroute();
+    this.doReroute();
     this.$store.commit("setActivedPage", "/teams");
     document.title = "Team | NGC";
     this.$vuetify.goTo("#Team");
@@ -181,8 +182,22 @@ export default {
       items.push({ id: id, name: "成員", children: [] });
       id++;
       vm.getProject.members.forEach(element => {
-        items[0].children.push({ id: id, name: element.name });
+        items[0].children.push({
+          id: id,
+          name: element.name + " - " + element.job.toUpperCase()
+        });
         id++;
+      });
+      items.push({
+        id: id,
+        name: "標籤",
+        children: [{ id: id + 1, name: vm.getProject.tags }]
+      });
+      id++;
+      items.push({
+        id: id,
+        name: "平台",
+        children: [{ id: id + 1, name: vm.getProject.platform }]
       });
       return items;
     },
@@ -194,14 +209,27 @@ export default {
     },
     checkLeader() {
       let state = this.getProject;
-      return state.members[0].uid == this.getAuth.UID;
+      return state.members[0].uid == this.getAuth[0].uid;
     },
     checkMember() {
-      let state = this.getProject;
-      state.members.forEach(element => {
-        if (element.uid == this.getAuth.UID) return true;
+      let isMember = false;
+      this.getProject.members.forEach(element => {
+        if (element.uid == this.getAuth[0].uid) {
+          isMember = true;
+          return true;
+        }
       });
-      return false;
+      return isMember;
+    },
+    checkApplicant() {
+      let isApplicant = false;
+      this.getProject.applicants.forEach(element => {
+        if (element.uid == this.getAuth[0].uid) {
+          isApplicant = true;
+          return true;
+        }
+      });
+      return isApplicant;
     }
   },
   wathc: {
