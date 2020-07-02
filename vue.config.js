@@ -9,8 +9,6 @@ module.exports = {
         "/about",
         "/games",
         "/games/game",
-        "/games/pingpong",
-        "/games/lomo",
         "/teams",
         "/teams/project",
         "/calendar",

@@ -6,7 +6,6 @@
           No Game, No Life <br />
           <h1 class="about-title-mirror text-left">No Game, No Life</h1>
         </h1>
-
         <v-carousel
           v-if="getGames"
           class="quinary"
@@ -22,8 +21,8 @@
             :key="i"
             v-on:click.native="handleClick(item)"
             :to="'/games/game'"
-          >
-            <v-row justify="center">
+            ><v-row justify="center">
+              <v-col cols="12"> </v-col>
               <v-col cols="12" lg="8">
                 <v-img
                   :src="item.imgURL"
