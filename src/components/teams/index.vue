@@ -120,6 +120,8 @@ export default {
   components: {},
   data() {
     return {
+      duration: 5,
+      recordDate: new Date(),
       valid: true,
       dialog: false,
       formData: {
@@ -206,7 +208,10 @@ export default {
   watch: {
     projects() {
       let vm = this;
-      vm.setProjects();
+      if (vm.recordDate > new Date() + vm.duration) {
+        vm.recordDate = new Date();
+        vm.setProjects();
+      }
     }
   }
 };

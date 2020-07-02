@@ -11,11 +11,12 @@ export async function retrive(collection) {
 }
 
 export async function retriveDoc(collection, id) {
-  return await firebase
+  let unsubscribe = await firebase
     .firestore()
     .collection(collection)
     .doc(id)
     .onSnapshot(function(doc) {
       store.commit("setSelectProject", doc.data());
     });
+  return unsubscribe;
 }

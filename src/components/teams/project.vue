@@ -137,6 +137,8 @@ export default {
   components: {},
   data() {
     return {
+      duration: 5,
+      recordDate: new Date(),
       project: null,
       dialog: false,
       introduction: ""

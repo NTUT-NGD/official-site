@@ -123,6 +123,8 @@ import { retrive } from "@/api/retriveData/retrive.js";
 export default {
   data() {
     return {
+      duration: 5,
+      recordDate: new Date(),
       today: new Date().toISOString().substr(0, 10),
       focus: "",
       type: "month",
@@ -184,6 +186,8 @@ export default {
   watch: {
     events() {
       let vm = this;
+      if (new Date() < vm.recordDate + vm.duration) return;
+      vm.recordDate = new Date();
       vm.setEvents();
     }
   },
