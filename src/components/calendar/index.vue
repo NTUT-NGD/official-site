@@ -184,12 +184,12 @@ export default {
     this.setEvents();
   },
   watch: {
-    events() {
-      let vm = this;
-      if (new Date() < vm.recordDate + vm.duration) return;
-      vm.recordDate = new Date();
-      vm.setEvents();
-    }
+    // events() {
+    //   let vm = this;
+    //   if (new Date() < vm.recordDate + vm.duration) return;
+    //   vm.recordDate = new Date();
+    //   vm.setEvents();
+    // }
   },
   methods: {
     async setEvents() {

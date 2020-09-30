@@ -235,10 +235,10 @@ export default {
     }
   },
   wathc: {
-    getProject: {
-      handler: function() {},
-      deep: true
-    }
+    // getProject: {
+    //   handler: function() {},
+    //   deep: true
+    // }
   }
 };
 </script>

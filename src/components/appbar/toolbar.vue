@@ -17,7 +17,7 @@
         color="rgb(0, 0, 0, 0)"
         icon
         style="position:relative;top:120px;transform: rotate(0deg);"
-        href="https://www.facebook.com/groups/2620701194872277/"
+        href="https://www.facebook.com/NTUTGameDesign"
       >
         <v-icon size="24px" color="quaternary">mdi-facebook</v-icon>
       </v-btn>

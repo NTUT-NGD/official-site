@@ -29,7 +29,7 @@ const routes = [
       {
         path: "game",
         name: "game",
-        component: () => import("../components/games/project.vue")
+        component: () => import("../components/games/game.vue")
       },
       {
         path: "pingpong",
